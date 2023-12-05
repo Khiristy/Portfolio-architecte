@@ -1,0 +1,34 @@
+{
+    "files.encoding": "utf8",
+    "folders": [
+        {
+            "path": "./"
+        }
+    ],
+    "settings": {
+        "liveSassCompile": {
+            "settings": {
+                "formats": [
+                    {
+                        "format": "expanded",
+                        "extensionName": ".css",
+                        "savePath": "/assets/css"
+                    },
+                    // {
+                    //     "format": "compressed",
+                    //     "extensionName": ".min.css",
+                    //     "savePath": "/assets/css"
+                    // },
+                ],
+                "generateMap": false,
+                "showOutputWindow": false,
+                "showOutputWindowOn": "Error",
+                "autoprefix": [
+                    // "> 1%",
+                    // "last 2 versions"
+                ]
+            }
+        }
+    }
+}
+
