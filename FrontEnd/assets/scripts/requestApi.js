@@ -124,34 +124,34 @@ apiGetCategories()
 
 
 
-// function apiPostWorks() {
+function apiPostWorks() {
 
-//   const url = 'http://localhost:5678/api/users/works';
+  const url = 'http://localhost:5678/api/users/works';
 
-//   // Données à envoyer dans la requête (si nécessaire)
-//   const login = {
-//     image : '',
-//     title : 'sdvsvsdv',
-//     category : 1442424,
-//   };
+  // Données à envoyer dans la requête (si nécessaire)
+  const login = {
+    image : '',
+    title : 'sdvsvsdv',
+    category : 1442424,
+  };
 
-//   // Configuration de la requête
-//   const requestOptions = {
-//     method: 'POST', // Méthode de la requête
-//     headers: {
-//       'Content-Type': 'application/json' // Type de contenu du corps de la requête
-//       // Vous pouvez également ajouter d'autres en-têtes ici si nécessaire
-//     },
-//     body: JSON.stringify(login) // Corps de la requête (converti en format JSON)
-//   };
+  // Configuration de la requête
+  const requestOptions = {
+    method: 'POST', // Méthode de la requête
+    headers: {
+      'Content-Type': 'application/json' // Type de contenu du corps de la requête
+      // Vous pouvez également ajouter d'autres en-têtes ici si nécessaire
+    },
+    body: JSON.stringify(login) // Corps de la requête (converti en format JSON)
+  };
 
-//   // Effectuer la requête Fetch
-//   fetch(url, requestOptions)
-//     .then(response => response.json()) // Analyser la réponse JSON
-//     .then(data => console.log(data)) // Faire quelque chose avec les données
-//     .catch(error => console.error('Erreur :', error));
+  // Effectuer la requête Fetch
+  fetch(url, requestOptions)
+    .then(response => response.json()) // Analyser la réponse JSON
+    .then(data => console.log(data)) // Faire quelque chose avec les données
+    .catch(error => console.error('Erreur :', error));
 
-// }
-// apiPostWorks()
+}
+apiPostWorks()
 
 
