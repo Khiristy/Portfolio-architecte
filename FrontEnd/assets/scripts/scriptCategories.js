@@ -39,11 +39,9 @@ function categories(dataCategories) {
         const element = arrayFigure[index];
         console.log(element);
         console.log(this.dataset.categoryId);
-        if (element.classList.contains('hidden')) {
-  
+       
           element.classList.remove('hidden');
   
-        }
       }
     })
   }
