@@ -27,7 +27,7 @@ function apiLogin() {
 
 }
 
-// apiLogin()
+
 
 function apiGetWorks() {
 
@@ -52,7 +52,7 @@ function apiGetWorks() {
 
 }
 
-apiGetWorks()
+
 
 function apiGetCategories() {
 
@@ -76,7 +76,7 @@ function apiGetCategories() {
 
 }
 
-apiGetCategories()
+
 
 
 function apiPostWorks() {
