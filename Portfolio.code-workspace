@@ -12,7 +12,7 @@
                     {
                         "format": "expanded",
                         "extensionName": ".css",
-                        "savePath": "/assets/css"
+                        "savePath": "FrontEnd/assets/css"
                     },
                     // {
                     //     "format": "compressed",
