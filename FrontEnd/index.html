@@ -68,21 +68,29 @@
 					<h4 class="modale_title">Ajout photo</h4>
 					<form class="modale_form" id="modaleForm" action="#" method="post">
 						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInput').click()">
-							<label>+Ajouter photo</label>
 							<input class="drop_area-input" type="file" id="fileInput" multiple />
-							<i class="fa-regular fa-image"></i>
-							<p class="drop_area-info">jpg, png: 4mo max.</p>
+							<div class="modale_background">
+								<i class="fa-regular fa-image"></i>
+								<label>+Ajouter photo</label>
+								<p class="drop_area-info">jpg, png: 4mo max.</p>
+							</div>
 						</div>
-						<label>Titre</label>
-						<input type="text" name="title">
-						<label>Catégories</label>
-						<select type="text" name="categorie">
-							<option value="">Hotels & Restaurants</option>
-							<option value="">Appartements</option>
-							<option value="">Objets</option>
-							<option value="">Tous</option>
-						</select>
+						<div class="modale_champs">
+							<label>Titre</label>
+							<input type="text" name="title">
+							<label>Catégories</label>
+							<select type="text" name="categorie">
+								<option value="">Hotels & Restaurants</option>
+								<option value="">Appartements</option>
+								<option value="">Objets</option>
+								<option value="">Tous</option>
+							</select>
+						</div>
+						<div class="modale_bar"></div>
 					</form>
+					<button class="modale_valid" id="modaleValid">
+						Valider
+					</button>
 				</div>
 
 			</div>

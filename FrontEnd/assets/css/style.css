@@ -2,18 +2,87 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -23,8 +92,17 @@ menu, nav, output, ruby, section, summary, time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   display: block;
 }
 
@@ -32,16 +110,20 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
-blockquote, q {
+blockquote,
+q {
   quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
   content: "";
   content: none;
 }
@@ -143,10 +225,88 @@ li:hover {
   translate: -50% -50%;
   border-radius: 10px;
   z-index: -1;
-  display: flex;
-  justify-content: center;
   opacity: 0;
   transition: 1s;
+}
+.modale_title {
+  font-family: inherit;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+.modale_content {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modale_background {
+  background-color: #E8F1F6;
+  width: 420px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.modale_background i {
+  margin-top: 20px;
+  font-size: 76px;
+  color: #CBD6DC;
+}
+.modale_background label {
+  width: 173px;
+  height: 36px;
+  border-radius: 50px;
+  background-color: #CBD6DC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Work Sans;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #306685;
+}
+.modale_background p {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  color: #444444;
+  margin-bottom: 15px;
+}
+.modale_champs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 15px 0 20px 0;
+  gap: 10px;
+}
+.modale_champs label {
+  margin-top: 5px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #3D3D3D;
+}
+.modale_champs input {
+  width: 420px;
+  height: 51px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.0901960784);
+}
+.modale_champs select {
+  width: 422px;
+  height: 53px;
+  border: none;
+  background: none;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.0901960784);
 }
 .modale_close {
   position: absolute;
@@ -161,6 +321,25 @@ li:hover {
 .modale_show {
   z-index: 3;
   opacity: 1;
+}
+.modale_bar {
+  width: 420px;
+  height: 1px;
+  background-color: #B3B3B3;
+}
+.modale_valid {
+  text-align: center;
+  margin-top: 50px;
+  width: 237px;
+  height: 36px;
+  border-radius: 60px;
+  background-color: #A7A7A7;
+  border: none;
+  font-family: Syne;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  color: white;
 }
 
 .drop_area-input {
