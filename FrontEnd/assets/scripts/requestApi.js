@@ -1,4 +1,3 @@
-
 function apiLogin() {
 
   const url = 'http://localhost:5678/api/users/login';
@@ -52,8 +51,6 @@ function apiGetWorks() {
 
 }
 
-
-
 function apiGetCategories() {
 
   const url = 'http://localhost:5678/api/categories';
@@ -84,7 +81,7 @@ function apiPostWorks() {
   const url = 'http://localhost:5678/api/users/works';
 
   // Données à envoyer dans la requête (si nécessaire)
-  const login = {
+  const data = {
     image : '',
     title : '',
     category : '',
@@ -97,7 +94,7 @@ function apiPostWorks() {
       'Content-Type': 'application/json' // Type de contenu du corps de la requête
       // Vous pouvez également ajouter d'autres en-têtes ici si nécessaire
     },
-    body: JSON.stringify(login) // Corps de la requête (converti en format JSON)
+    body: new FormData(data)// Corps de la requête (converti en format JSON)
   };
 
   // Effectuer la requête Fetch

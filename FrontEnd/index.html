@@ -16,6 +16,7 @@
 	<script src="./assets/scripts/gallery.js"></script>
 	<script src="./assets/scripts/scriptCategories.js"></script>
 	<script src="./assets/scripts/scriptGallery.js"></script>
+	<script src="./assets/scripts/modale.js" async></script>
 	<script src="https://kit.fontawesome.com/ecfbb69621.js" crossorigin="anonymous"></script>
 
 </head>
@@ -25,10 +26,6 @@
 		<i class="fa-regular fa-pen-to-square"></i>
 		<button>Mode édition</button>
 	</div>
-	<!-- <div class="modale">
-		<button class="modale_close">&times;</button>
-
-	</div> -->
 
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
@@ -42,6 +39,7 @@
 		</nav>
 	</header>
 	<main>
+		<button></button>
 		<section id="introduction">
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
@@ -58,7 +56,36 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<h2>Mes Projets
+				<button class="modale_btn" id="modaleOpen">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<span>modifier</span>
+				</button>
+			</h2>
+			<div class="modale" id="modale">
+				<button class="modale_close" id="modaleClose">&times;</button>
+				<div class="modale_content">
+					<h4 class="modale_title">Ajout photo</h4>
+					<form class="modale_form" id="modaleForm" action="#" method="post">
+						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInput').click()">
+							<label>+Ajouter photo</label>
+							<input class="drop_area-input" type="file" id="fileInput" multiple />
+							<i class="fa-regular fa-image"></i>
+							<p class="drop_area-info">jpg, png: 4mo max.</p>
+						</div>
+						<label>Titre</label>
+						<input type="text" name="title">
+						<label>Catégories</label>
+						<select type="text" name="categorie">
+							<option value="">Hotels & Restaurants</option>
+							<option value="">Appartements</option>
+							<option value="">Objets</option>
+							<option value="">Tous</option>
+						</select>
+					</form>
+				</div>
+
+			</div>
 			<nav class="filter">
 				<button id="allWork">Tous</button>
 			</nav>
