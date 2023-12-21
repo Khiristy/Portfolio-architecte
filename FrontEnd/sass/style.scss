@@ -239,6 +239,34 @@ li:hover {
 	opacity: 0;
 	transition: 1s;
 
+	&_form {
+		display: none;
+	}
+
+	&_gallery {
+		margin-top: 40px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		max-width: 430px;
+
+		&-pos {
+			position: relative;
+		}
+		
+		&-trash {
+			position: absolute;
+			top: 7px;
+			right: 5px;
+		}
+
+		& img {
+			
+			width: 76.61px;
+		}
+	}
+
+
 	&_title {
 		font-family: inherit;
 		font-size: 26px;

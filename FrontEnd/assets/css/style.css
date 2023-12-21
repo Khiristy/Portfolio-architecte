@@ -228,6 +228,27 @@ li:hover {
   opacity: 0;
   transition: 1s;
 }
+.modale_form {
+  display: none;
+}
+.modale_gallery {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 430px;
+}
+.modale_gallery-pos {
+  position: relative;
+}
+.modale_gallery-trash {
+  position: absolute;
+  top: 7px;
+  right: 5px;
+}
+.modale_gallery img {
+  width: 76.61px;
+}
 .modale_title {
   font-family: inherit;
   font-size: 26px;

@@ -66,12 +66,13 @@
 				<button class="modale_close" id="modaleClose">&times;</button>
 				<div class="modale_content">
 					<h4 class="modale_title">Ajout photo</h4>
+					<div class="modale_gallery" id="modaleGallery"></div>
 					<form class="modale_form" id="modaleForm" action="#" method="post">
 						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInput').click()">
 							<input class="drop_area-input" type="file" id="fileInput" multiple />
 							<div class="modale_background">
 								<i class="fa-regular fa-image"></i>
-								<label>+Ajouter photo</label>
+								<label>+ Ajouter photo</label>
 								<p class="drop_area-info">jpg, png: 4mo max.</p>
 							</div>
 						</div>
@@ -87,10 +88,11 @@
 							</select>
 						</div>
 						<div class="modale_bar"></div>
+						<button class="modale_valid" id="modaleValid">
+							Valider
+						</button>
 					</form>
-					<button class="modale_valid" id="modaleValid">
-						Valider
-					</button>
+					
 				</div>
 
 			</div>
