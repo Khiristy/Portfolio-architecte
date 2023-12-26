@@ -167,7 +167,9 @@ header {
   text-align: center;
   padding: 15px 0 15px 0;
 }
-
+.edit.is_hidden {
+  display: none;
+}
 .edit button {
   background-color: transparent;
   border: none;
@@ -228,7 +230,23 @@ li:hover {
   opacity: 0;
   transition: 1s;
 }
+.modale_btn {
+  display: flex;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  position: absolute;
+  top: 605px;
+  left: 730px;
+}
 .modale_form {
+  position: relative;
+}
+.modale_form.is_hidden {
   display: none;
 }
 .modale_gallery {
@@ -237,6 +255,9 @@ li:hover {
   flex-wrap: wrap;
   gap: 10px;
   max-width: 430px;
+}
+.modale_gallery.is_hidden {
+  display: none;
 }
 .modale_gallery-pos {
   position: relative;
@@ -339,14 +360,28 @@ li:hover {
   border: none;
   font-size: 24px;
 }
+.modale_return {
+  position: absolute;
+  top: 15;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+}
 .modale_show {
   z-index: 3;
   opacity: 1;
 }
 .modale_bar {
+  border: none;
+  color: #B3B3B3;
   width: 420px;
-  height: 1px;
-  background-color: #B3B3B3;
+  height: 0px;
+  border: 1px solid #B3B3B3;
+  position: absolute;
+  top: 550px;
 }
 .modale_valid {
   text-align: center;
@@ -354,13 +389,18 @@ li:hover {
   width: 237px;
   height: 36px;
   border-radius: 60px;
-  background-color: #A7A7A7;
+  background-color: #1D6154;
   border: none;
   font-family: Syne;
   font-size: 14px;
   font-weight: 700;
   line-height: 17px;
   color: white;
+  position: absolute;
+  top: 545px;
+}
+.modale_valid.is_disable {
+  background-color: #B3B3B3;
 }
 
 .drop_area-input {
