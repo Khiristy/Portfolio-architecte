@@ -73,6 +73,7 @@ const ProjectEditor = {
             trashImg.classList.add("fa-solid")
             trashImg.classList.add("fa-trash-can")
             trashImg.classList.add("modale_gallery-trash")
+            trashImg.setAttribute("data-id",element.id)
             imgPos.appendChild(trashImg)
         }
     },
@@ -84,30 +85,43 @@ const ProjectEditor = {
             const element = trash[index];
             trash[index].addEventListener('click', async function () {
 
-                const url = 'http://localhost:5678/api/users//works/{id}';
+                const id = this.dataset.id 
+                console.log(id);
+                const url = `http://localhost:5678/api/works/${id}`;
                 const token = window.localStorage.getItem("tokenConnexion")
                 const userId = window.localStorage.getItem("userId")
 
-                const login = {
-                    email: email.value,
-                    password: password.value,
-                };
-
-
-                console.log(e);
-                let response = await fetch("http://localhost:5678/api/users//works/{id}", {
+                console.log(url);
+                console.log(token);
+                
+                let response = await fetch(url, {
                     method: "DELETE",
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(login),
+                    // body: JSON.stringify(login),
                     //   body: new FormData(formLogin),
                 });
 
-                fetch(url, requestOptions)
-                    .then(response => response.json())
-                    .then(data => console.log(data))
-                    .catch(error => console.error('Erreur :', error));
+                const headers = {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json' // Selon le type de données que vous envoyez
+                  };
+                  
+                  fetch(url, {
+                    method: 'DELETE',
+                    headers: headers
+                  })
+                  .then(response => {
+                    if (response.ok) {
+                      console.log("La requête DELETE a été exécutée avec succès.");
+                    } else {
+                      console.error(`Erreur lors de la requête DELETE : ${response.status} - ${response.statusText}`);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Erreur lors de la requête DELETE:', error);
+                  });
             })
         }
     },
