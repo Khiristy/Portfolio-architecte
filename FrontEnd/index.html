@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="./assets/css/style.css" />
 	<link rel="shortcut icon" href="./assets/icons/78942_maps_maps.png" type="image/x-icon" />
 	<script src="./assets/scripts/requestApi.js"></script>
-	<script src="./assets/scripts/gallery.js"></script>
+	<script src="./assets/scripts/gallery.js"defer></script>
 	<script src="./assets/scripts/scriptCategories.js"></script>
 	<script src="./assets/scripts/scriptGallery.js"></script>
 	<script src="./assets/scripts/modale.js" defer></script>
@@ -77,7 +77,7 @@
 			</button>
 				<div class="modale_content">
 
-					<h4 class="modale_title" id="modaleTitle">Gallerie photo</h4>
+					<h4 class="modale_title" id="modaleTitle"></h4>
 
 
 
@@ -86,24 +86,24 @@
 
 
 
-					<form class="modale_form is_hidden" id="modaleForm" action="#" method="post">
-						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInput').click()">
-							<input class="drop_area-input" type="file" id="fileInput" multiple />
+					<form class="modale_form is_hidden" id="modaleForm" action="#" method="post" enctype="multipart/form-data">
+						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInputImg').click()">
+							<input class="drop_area-input" name="image" type="file" id="fileInputImg" multiple />
 							<div class="modale_background">
 								<i class="fa-regular fa-image"></i>
 								<label>+ Ajouter photo</label>
 								<p class="drop_area-info">jpg, png: 4mo max.</p>
 							</div>
 						</div>
-						<div class="modale_champs">
+						<div class="modale_champs" >
 							<label>Titre</label>
-							<input type="text" name="title" />
+							<input type="text" name="title" id="formEditTitle"/>
 							<label>Catégories</label>
-							<select type="text" name="categorie">
-								<option value="">Hotels & Restaurants</option>
-								<option value="">Appartements</option>
-								<option value="">Objets</option>
-								<option value="">Tous</option>
+							<select type="text" name="category" id="formEditCat">
+								<option value="1">Hotels & Restaurants</option>
+								<option value="2">Appartements</option>
+								<option value="3">Objets</option>
+								<option value="4">Tous</option>
 							</select>
 						</div>
 					</form>
@@ -112,7 +112,7 @@
 
 
 					<hr class="modale_bar"></hr>
-					<button class="modale_valid" id="modaleValid">Ajouter une photo</button>
+					<button class="modale_valid" id="modaleValid"></button>
 				</div>
 			</div>
 			<nav class="filter">

@@ -41,9 +41,22 @@ const Modale = {
 
 const ProjectEditor = {
     init: function () {
+
+        this.btnSwitch = document.getElementById('modaleValid');
+        this.btnReturn = document.getElementById('modaleReturn');
+        this.modaleOpen = document.getElementById('modaleOpen')
+
+
+        this.modaleTitle = document.getElementById('modaleTitle');
+        this.modaleGallery = document.getElementById('modaleGallery');
+        this.modaleAddWork = document.getElementById('modaleForm');
+
+        this.step = 1
+
         this.request()
         this.switchModale()
-        this.addWorks()
+        this.gotostep(this.step)
+        // this.addWorks()
 
     },
 
@@ -93,35 +106,31 @@ const ProjectEditor = {
 
     addWorks: function () {
 
-        const btnValid = document.getElementById('modale_valid')
+        const url = 'http://localhost:5678/api/works'
+        const token = window.localStorage.getItem("tokenConnexion")
 
-        btnValid.addEventListener('click', function () {
+        const formData = new FormData(document.getElementById('modaleForm'));
+        const imgUrl = document.getElementById('fileInputImg').getAttribute('src');
+        const title = document.getElementById('formEditTitle').value;
+        const category = document.getElementById('formEditCat');
+        const categoryValue = category.options[category.selectedIndex].value;
+        console.log(formData);
 
-            const url = 'http://localhost:5678/api/users/works'
-            const token = window.localStorage.getItem("tokenConnexion")
-            const userId = window.localStorage.getItem("userId")
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                // 'Content-Type': 'application/json'
+            },
 
-            const formData = new FormData();
-            const imgUrl = document.querySelector('img').getAttribute('src');
-            const title = document.getElementById('champs_projet').value;
-            const category = document.getElementById('categorie_projet');
-            const categoryValue = category.options[category.selectedIndex].value;
+            body: formData
+        }
 
-            const requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                
-                body: formData
-            }
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Erreur :', error));
 
-            fetch(url, requestOptions)
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Erreur :', error));
-        })
     },
 
     deleteWorks: function (data) {
@@ -173,34 +182,62 @@ const ProjectEditor = {
 
     switchModale: function () {
 
-        const btnSwitch = document.getElementById('modaleValid')
-        const btnReturn = document.getElementById('modaleReturn')
+        this.modaleOpen.addEventListener('click', () => {
 
-        const modaleTitle = document.getElementById('modaleTitle')
-        const modaleGallery = document.getElementById('modaleGallery')
-        const modaleAddWork = document.getElementById('modaleForm')
-
-        btnSwitch.addEventListener('click', function () {
-
-            btnSwitch.innerHTML = 'Valider'
-            btnSwitch.classList.add('is_disable')
-            modaleTitle.innerHTML = 'Ajout photo'
-            modaleGallery.classList.add('is_hidden')
-            modaleAddWork.classList.remove('is_hidden')
-
+            this.step = 1
+            this.gotostep(this.step)
         })
 
+        this.btnSwitch.addEventListener('click', () => {
 
-        btnReturn.addEventListener('click', function () {
+            if (this.step <= 3) {
+                this.step++
+                this.gotostep(this.step)
+            }
+        })
 
-            btnSwitch.innerHTML = 'Ajouter une photo'
-            btnSwitch.classList.remove('is_disable')
-            modaleTitle.innerHTML = 'Gallerie photo'
-            modaleGallery.classList.remove('is_hidden')
-            modaleAddWork.classList.add('is_hidden')
+        this.btnReturn.addEventListener('click', () => {
+
+            if (this.step > 1) {
+                this.step--
+                this.gotostep(this.step)
+            }
         })
     },
 
+    gotostep: function (step) {
+
+        switch (step) {
+
+            case 1:
+                this.btnSwitch.innerHTML = 'Ajouter une photo'
+                this.btnSwitch.classList.remove('is_disable')
+                this.modaleTitle.innerHTML = 'Gallerie photo'
+                this.modaleGallery.classList.remove('is_hidden')
+                this.modaleAddWork.classList.add('is_hidden')
+                break;
+
+            case 2:
+                this.btnSwitch.innerHTML = 'Valider'
+                this.btnSwitch.classList.add('is_disable')
+                this.modaleTitle.innerHTML = 'Ajout photo'
+                this.modaleGallery.classList.add('is_hidden')
+                this.modaleAddWork.classList.remove('is_hidden')
+                break;
+
+            case 3:
+                this.addWorks()
+                break;
+
+            default:
+                console.log('error');
+                break;
+        }
+
+
+
+
+    }
 }
 
 
