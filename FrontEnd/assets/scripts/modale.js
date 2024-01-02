@@ -144,7 +144,7 @@ const ProjectEditor = {
                 console.log(id);
                 const url = `http://localhost:5678/api/works/${id}`;
                 const token = window.localStorage.getItem("tokenConnexion")
-                const userId = window.localStorage.getItem("userId")
+                
 
                 let response = await fetch(url, {
                     method: "DELETE",

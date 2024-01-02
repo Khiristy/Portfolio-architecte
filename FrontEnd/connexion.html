@@ -20,7 +20,7 @@
     <script src="./assets/scripts/requestApi.js"></script>
     <script refer src="./assets/scripts/login.js"></script>
   </head>
-  <body>
+  <body class="connexion_body">
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -32,8 +32,8 @@
         </ul>
       </nav>
     </header>
-    <main>
-      <h2>Login in</h2>
+    <main class="form_content">
+      <h2 class="form_title">Login in</h2>
       <form class="form_login" id="formlogin" action="#" method="post">
         <label>E-mail</label>
         <input id="email" type="email" name="email" placeholder="exemple@gmail.com" />
@@ -44,13 +44,12 @@
       </form>
 	  <p id="loginResult"></p>
     </main>
-
-    <footer>
-      <nav>
-        <ul>
-          <li>Mentions Légales</li>
-        </ul>
-      </nav>
-    </footer>
   </body>
+  <footer class="connexion_footer">
+    <nav>
+      <ul>
+        <li>Mentions Légales</li>
+      </ul>
+    </nav>
+  </footer>
 </html>
