@@ -32,6 +32,8 @@ const Filter = {
 
     this.buttonAllWork = document.getElementById("allWork")
 
+    
+
     this.request()
 
     // this.button = document.createElement("button")
@@ -94,16 +96,27 @@ const Filter = {
           console.log(this.dataset.categoryId);
           if (element.dataset.categoryId !== this.dataset.categoryId) {
             element.classList.add('hidden');
-            button.classList.add('is_actif')
           } else {
             element.classList.remove('hidden');
-            button.classList.remove('is_actif')
-
           }
         }
       })
     }
   },
 
+  hoverFilter: function () {
+    this.buttonFilterList = this.filter.querySelectorAll("button")
+    console.log(this.buttonFilterList);
+    for (let index = 0; index < this.buttonFilterList.length; index++) {
+      const button = this.buttonFilterList[index];
+      button.addEventListener('click', function () {
+        button.classList.add('is_actif')
 
+
+
+
+
+      } )
+  }
+  }
 }

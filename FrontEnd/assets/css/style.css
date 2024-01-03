@@ -176,16 +176,18 @@ header {
   color: white;
 }
 
-.connexion_body {
+.background_body {
   background-color: #FFFEF8;
   width: 100%;
 }
-.connexion_footer {
+.background_footer {
   background-color: white;
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
+}
+.background_footer-connexion {
+  position: fixed;
 }
 
 .form_content {
@@ -202,8 +204,46 @@ header {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 15px;
+}
+.form_champs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 15px 0 20px 0;
+  gap: 10px;
+}
+.form_champs label {
+  margin-top: 5px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #3D3D3D;
+}
+.form_champs input {
+  width: 420px;
+  height: 51px;
+  border: none;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.0901960784);
+}
+.form_connexion {
+  text-align: center;
+  width: 237px;
+  height: 36px;
+  border-radius: 60px;
+  background-color: #1D6154;
+  border: none;
+  font-family: Syne;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  color: white;
+  margin-bottom: 15px;
+}
+.form_forgot-password {
+  text-decoration: underline;
 }
 
 section {
@@ -472,12 +512,8 @@ li:hover {
   display: flex;
   justify-content: center;
   gap: 15px;
+  padding-bottom: 20px;
 }
-
-.hidden {
-  display: none;
-}
-
 .filter button {
   display: flex;
   justify-content: center;
@@ -496,6 +532,10 @@ li:hover {
 .filter button.is_actif {
   background-color: #1D6154;
   color: white;
+}
+
+.hidden {
+  display: none;
 }
 
 .gallery {

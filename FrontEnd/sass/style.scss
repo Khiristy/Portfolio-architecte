@@ -180,18 +180,20 @@ header {
 	}
 }
 
-.connexion {
+.background {
 	&_body {
 		background-color: #FFFEF8;
 		width: 100%;
-		}
+	}
 
 	&_footer {
 		background-color: white;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		&-connexion {
 			position: fixed;
-			bottom: 0; 
-			left: 0;
-			width: 100%;
+		}
 	}
 }
 
@@ -212,8 +214,52 @@ header {
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 		gap: 15px;
+	}
+
+	&_champs {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		margin: 15px 0 20px 0;
+		gap: 10px;
+
+		& label {
+			margin-top: 5px;
+			font-family: inherit;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 16px;
+			color: #3D3D3D;
+		}
+
+		& input {
+			width: 420px;
+			height: 51px;
+			border: none;
+			box-shadow: 0px 4px 14px 0px #00000017;
+
+		}
+	}
+
+	&_connexion {
+		text-align: center;
+		width: 237px;
+		height: 36px;
+		border-radius: 60px;
+		background-color: #1D6154;
+		border: none;
+		font-family: Syne;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 17px;
+		color: white;
+		margin-bottom: 15px;
+	}
+
+	&_forgot-password {
+		text-decoration: underline;
 	}
 }
 
@@ -273,6 +319,7 @@ li:hover {
 	line-height: 16px;
 	text-align: center;
 }
+
 .modale {
 	background-color: white;
 	width: 630px;
@@ -289,7 +336,7 @@ li:hover {
 
 	&_form {
 		position: relative;
-		
+
 		&.is_hidden {
 			display: none;
 		}
@@ -475,11 +522,13 @@ li:hover {
 		color: white;
 		position: absolute;
 		top: 545px;
+
 		&.is_disable {
 			background-color: #B3B3B3;
 		}
 	}
-	
+
+
 
 }
 
@@ -530,31 +579,34 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	gap: 15px;
+	padding-bottom: 20px;
+
+	& button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: transparent;
+		color: #1D6154;
+		padding: 10px;
+		border: 1px solid #1D6154;
+		border-radius: 60px;
+		height: 37px;
+		font-family: inherit;
+		font-weight: 700;
+		font-size: 16px;
+		margin-bottom: 20px;
+
+		&.is_actif {
+			background-color: #1D6154;
+			color: white;
+		}
+	}
 }
 
 .hidden {
 	display: none;
 }
 
-.filter button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: transparent;
-	color: #1D6154;
-	padding: 10px;
-	border: 1px solid #1D6154;
-	border-radius: 60px;
-	height: 37px;
-	font-family: inherit;
-	font-weight: 700;
-	font-size: 16px;
-	margin-bottom: 20px;
-	&.is_actif {
-		background-color: #1D6154;
-		color: white;
-	}
-}
 
 .gallery {
 	width: 100%;
