@@ -355,7 +355,7 @@ li:hover {
 		}
 
 
-		&-pos {
+		&-figure {
 			position: relative;
 		}
 
@@ -535,6 +535,7 @@ li:hover {
 .drop_area {
 	&-input {
 		opacity: 0;
+		width: 200px;
 	}
 }
 
@@ -595,7 +596,7 @@ li:hover {
 		font-weight: 700;
 		font-size: 16px;
 		margin-bottom: 20px;
-
+		&:hover,
 		&.is_actif {
 			background-color: #1D6154;
 			color: white;

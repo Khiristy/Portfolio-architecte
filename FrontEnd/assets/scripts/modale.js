@@ -4,9 +4,10 @@ window.addEventListener("load", function () {
 })
 
 
+
 //ouverture/fermeture modale
 const Modale = {
-    init: function () {
+    init() {
 
         this.modale = document.getElementById('modale')
         this.modaleOpen = document.getElementById('modaleOpen')
@@ -15,27 +16,49 @@ const Modale = {
         this.event()
     },
 
-    event: function () {
+    hide() {
 
-        const that = this
+        this.modale.classList.remove('modale_show')
+        this.body.classList.remove('overlay')
 
-        this.modaleOpen.addEventListener('click', function () {
-            that.modale.classList.add('modale_show')
-            that.body.classList.add('overlay')
+        const modaleGallery = document.getElementById('modaleGallery')
+        const modaleAddWork = document.getElementById('modaleForm')
+
+        modaleGallery.classList.remove('is_hidden')
+        modaleAddWork.classList.add('is_hidden')
+
+    },
+
+    event() {
+
+        this.modaleOpen.addEventListener('click', (e) => {
+
+            const target = e.target
+            this.modale.classList.add('modale_show')
+            setTimeout(() => {
+                this.body.classList.add('overlay')
+            }, 100);
         })
 
-        this.modaleClose.addEventListener('click', function () {
-            that.modale.classList.remove('modale_show')
-            that.body.classList.remove('overlay')
+        this.modaleClose.addEventListener('click', () => {
 
-            const modaleGallery = document.getElementById('modaleGallery')
-            const modaleAddWork = document.getElementById('modaleForm')
-            modaleGallery.classList.remove('is_hidden')
-            modaleAddWork.classList.add('is_hidden')
-
+            this.hide()
         })
-    }
+
+        this.body.addEventListener('click', (e) => {
+
+            if (this.body.classList.contains('overlay')) {
+                this.hide()
+            }
+        })
+
+        this.modale.addEventListener('click', (e) => {
+
+            e.stopPropagation()
+        })
+    },
 }
+
 
 //modifie contenu modale
 
@@ -86,21 +109,25 @@ const ProjectEditor = {
             const element = data[index];
             const imgProject = element.imageUrl
             const imgAlt = element.title
-            const imgPos = document.createElement("figure")
-            modaleGallery.appendChild(imgPos)
-            imgPos.classList.add('modale_gallery-pos')
+
+            const figure = document.createElement("figure")
+            modaleGallery.appendChild(figure)
+            figure.classList.add('modale_gallery-figure')
+            // figure.setAttribute('id', "projectModale-" + element.id)
+
+
 
             const image = document.createElement("img")
             image.src = imgProject
             image.alt = imgAlt
-            imgPos.appendChild(image)
+            figure.appendChild(image)
 
             const trashImg = document.createElement("i")
             trashImg.classList.add("fa-solid")
             trashImg.classList.add("fa-trash-can")
             trashImg.classList.add("modale_gallery-trash")
             trashImg.setAttribute("data-id", element.id)
-            imgPos.appendChild(trashImg)
+            figure.appendChild(trashImg)
         }
     },
 
@@ -140,24 +167,21 @@ const ProjectEditor = {
             const element = trash[index];
             trash[index].addEventListener('click', async function () {
 
-                const id = this.dataset.id
-                console.log(id);
-                const url = `http://localhost:5678/api/works/${id}`;
+                const projectId = this.dataset.id
+                console.log(projectId);
+                const url = `http://localhost:5678/api/works/${projectId}`;
                 const token = window.localStorage.getItem("tokenConnexion")
-                
 
                 let response = await fetch(url, {
                     method: "DELETE",
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    // body: JSON.stringify(login),
-                    //   body: new FormData(formLogin),
                 });
 
                 const headers = {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json' // Selon le type de données que vous envoyez
+                    'Content-Type': 'application/json'
                 };
 
                 fetch(url, {
@@ -166,7 +190,16 @@ const ProjectEditor = {
                 })
                     .then(response => {
                         if (response.ok) {
+                            console.log(response);
                             console.log("La requête DELETE a été exécutée avec succès.");
+                            const figures = document.querySelectorAll(".modale_gallery-figure")
+                            for (let index = 0; index < figures.length; index++) {
+                                const figure = figures[index];
+                                figure.remove()
+                            }
+                            
+                            ProjectEditor.request()
+
                         } else {
                             console.error(`Erreur lors de la requête DELETE : ${response.status} - ${response.statusText}`);
                         }
