@@ -65,16 +65,22 @@ const Modale = {
 
 const ProjectEditor = {
 
-    init: function () {
+    init() {
 
-        this.btnSwitch = document.getElementById('modaleValid');
+        this.modale = document.getElementById('modale');
+        this.body = document.body
+        this.btnSwitch = document.getElementById('modaleBtnSwitch');
+        this.btnValid = document.getElementById('modaleBtnValid');
         this.btnReturn = document.getElementById('modaleReturn');
-        this.modaleOpen = document.getElementById('modaleOpen')
+        this.modaleOpen = document.getElementById('modaleOpen');
 
 
         this.modaleTitle = document.getElementById('modaleTitle');
         this.modaleGallery = document.getElementById('modaleGallery');
         this.modaleAddWork = document.getElementById('modaleForm');
+        this.modaleFormCheck = document.getElementById('modaleFormCheck');
+        this.modaleFormCheckPos = document.getElementById('modaleFormCheckPos');
+
 
         this.fileInputImg = document.getElementById('fileInputImg');
         this.formEditTitle = document.getElementById('formEditTitle');
@@ -95,7 +101,7 @@ const ProjectEditor = {
 
     },
 
-    request: function () {
+    request() {
 
         const url = 'http://localhost:5678/api/works';
 
@@ -115,7 +121,7 @@ const ProjectEditor = {
             .catch(error => console.error('Erreur :', error));
     },
 
-    buildGallery: function (data) {
+    buildGallery(data) {
         const modaleGallery = document.getElementById('modaleGallery')
         for (let index = 0; index < data.length; index++) {
             const element = data[index];
@@ -147,29 +153,27 @@ const ProjectEditor = {
         let allFieldsHaveValues = false;
 
 
-        function checkAllFields() {
+        const checkAllFields = () => {
 
-            const btnSwitch = document.getElementById('modaleValid');
-
-            if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && this.formEditCat.value.trim() > '1') {
-                allFieldsHaveValues = true;
-                btnSwitch.classList.remove('is_disable');
+            if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && this.formEditCat.value.trim() >= 1) {
+                this.allFieldsHaveValues = true;
+                this.btnValid.classList.remove('is_disable');
             }
 
             else {
-                allFieldsHaveValues = false;
-                btnSwitch.classList.add('is_disable');
+                this.allFieldsHaveValues = false;
+                this.btnValid.classList.add('is_disable');
             }
 
-            return allFieldsHaveValues; 
+            return this.allFieldsHaveValues;
         }
 
         function handleFieldsCheck() {
 
             if (checkAllFields()) {
                 console.log('Tous les champs ont des valeurs.');
-            } 
-            
+            }
+
             else {
                 console.log('Au moins un champ est vide.');
             }
@@ -181,7 +185,7 @@ const ProjectEditor = {
 
     },
 
-    addWorks: function () {
+    addWorks() {
 
         const url = 'http://localhost:5678/api/works'
         const token = window.localStorage.getItem("tokenConnexion")
@@ -214,7 +218,7 @@ const ProjectEditor = {
 
     },
 
-    deleteWorks: function (data) {
+    deleteWorks(data) {
 
         const trash = document.querySelectorAll(".modale_gallery-trash")
         for (let index = 0; index < trash.length; index++) {
@@ -264,7 +268,7 @@ const ProjectEditor = {
 
     //*switch Modale*/
 
-    switchModale: function () {
+    switchModale() {
 
         this.modaleOpen.addEventListener('click', () => {
 
@@ -274,7 +278,14 @@ const ProjectEditor = {
 
         this.btnSwitch.addEventListener('click', () => {
 
-            if (this.step <= 3) {
+            if (this.step <= 2) {
+                this.step++
+                this.gotostep(this.step)
+            }
+        })
+        this.btnValid.addEventListener('click', () => {
+
+            if (this.step < 3) {
                 this.step++
                 this.gotostep(this.step)
             }
@@ -289,7 +300,7 @@ const ProjectEditor = {
         })
     },
 
-    gotostep: function (step) {
+    gotostep(step) {
 
         switch (step) {
 
@@ -300,23 +311,68 @@ const ProjectEditor = {
                 this.modaleGallery.classList.remove('is_hidden')
                 this.modaleAddWork.classList.add('is_hidden')
                 this.btnReturn.classList.add('is_hidden')
+
                 break;
 
             case 2:
-                this.btnSwitch.innerHTML = 'Valider'
-                this.btnSwitch.classList.add('is_disable')
+                this.btnSwitch.classList.add('is_hidden')
+                this.btnReturn.classList.remove('is_hidden')
+                this.btnValid.classList.add('is_actif')
+                this.btnValid.innerHTML = 'Valider'
+                this.btnValid.classList.add('is_disable')
+
+
                 this.modaleTitle.innerHTML = 'Ajout photo'
                 this.modaleGallery.classList.add('is_hidden')
                 this.modaleAddWork.classList.remove('is_hidden')
-                this.btnReturn.classList.remove('is_hidden')
+
                 break;
 
             case 3:
-                this.addWorks()
+                this.modaleFormCheck.classList.add('is_actif')
+                if (this.allFieldsHaveValues) {
+                    this.modaleFormCheck.classList.add('is_true')
+                    this.modaleFormCheckPos.innerText = 'Le projet à été ajouté avec succès !'
+
+                    const icon = document.createElement('i')
+
+                    icon.classList.add("fa-regular")
+                    icon.classList.add("fa-circle-check")
+
+                    this.modaleFormCheckPos.appendChild(icon)
+
+                    setTimeout(() => {
+                        this.addWorks()
+                        this.modale.classList.remove('modale_show')
+                        this.body.classList.remove('overlay')
+    
+                        const modaleGallery = document.getElementById('modaleGallery')
+                        const modaleAddWork = document.getElementById('modaleForm')
+    
+                        modaleGallery.classList.remove('is_hidden')
+                        modaleAddWork.classList.add('is_hidden')
+                    }, 3000);
+                    
+                }
+
+                else {
+
+                    this.modaleFormCheck.classList.add('is_false')
+                    this.modaleFormCheckPos.innerText = 'champs saisi incorrect ou manquant'
+
+                    const icon = document.createElement('i')
+
+                    icon.classList.add("fa-solid")
+                    icon.classList.add("fa-circle-xmark")
+                    this.modaleFormCheckPos.appendChild(icon)
+
+                }
+
                 break;
 
             default:
                 console.log('error');
+
                 break;
         }
 

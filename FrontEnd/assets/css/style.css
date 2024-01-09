@@ -318,6 +318,34 @@ li:hover {
 .modale_form.is_hidden {
   display: none;
 }
+.modale_form-check {
+  width: 60%;
+  height: 50px;
+  border-radius: 60px;
+}
+.modale_form-check.is_true {
+  background-color: #1D6154;
+  color: white;
+}
+.modale_form-check.is_false {
+  background-color: #8B0000;
+  color: white;
+}
+.modale_form-check--pos {
+  display: flex;
+  justify-content: center;
+  padding-top: 17px;
+  padding-left: 30px;
+}
+.modale_form-check--pos i {
+  position: relative;
+  left: -290px;
+  font-size: 25px;
+  top: -6px;
+}
+.modale_form-check.is_actif {
+  display: block;
+}
 .modale_gallery {
   margin-top: 40px;
   display: flex;
@@ -455,7 +483,7 @@ li:hover {
   position: absolute;
   top: 550px;
 }
-.modale_valid {
+.modale_btn {
   text-align: center;
   margin-top: 50px;
   width: 237px;
@@ -471,8 +499,17 @@ li:hover {
   position: absolute;
   top: 545px;
 }
-.modale_valid.is_disable {
+.modale_btn-switch.is_hidden {
+  display: none;
+}
+.modale_btn-valid {
+  display: none;
+}
+.modale_btn-valid.is_disable {
   background-color: #B3B3B3;
+}
+.modale_btn-valid.is_actif {
+  display: block;
 }
 
 .drop_area-input {

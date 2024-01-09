@@ -191,6 +191,7 @@ header {
 		bottom: 0;
 		left: 0;
 		width: 100%;
+
 		&-connexion {
 			position: fixed;
 		}
@@ -339,6 +340,45 @@ li:hover {
 
 		&.is_hidden {
 			display: none;
+		}
+
+		&-check {
+
+			width: 60%;
+			height: 50px;
+			border-radius: 60px;
+
+
+			&.is_true {
+				background-color: #1D6154;
+				color: white;
+
+			}
+
+			&.is_false {
+				background-color: #8B0000;
+				color: white;
+			}
+
+			&--pos {
+				display: flex;
+				justify-content: center;
+				padding-top: 17px;
+				padding-left: 30px;
+
+				& i {
+
+					position: relative;
+					left: -290px;
+					font-size: 25px;
+					top: -6px;
+				}
+			}
+
+			&.is_actif {
+				display: block;
+			}
+
 		}
 	}
 
@@ -490,6 +530,7 @@ li:hover {
 		background: transparent;
 		border: none;
 		font-size: 24px;
+
 		&.is_hidden {
 			display: none;
 		}
@@ -510,7 +551,7 @@ li:hover {
 		top: 550px;
 	}
 
-	&_valid {
+	&_btn {
 		text-align: center;
 		margin-top: 50px;
 		width: 237px;
@@ -526,14 +567,32 @@ li:hover {
 		position: absolute;
 		top: 545px;
 
-		&.is_disable {
-			background-color: #B3B3B3;
+		&-switch {
+
+			&.is_hidden {
+				display: none;
+			}
 		}
+
+		&-valid {
+			display: none;
+
+			&.is_disable {
+				background-color: #B3B3B3;
+			}
+
+			&.is_actif {
+				display: block;
+			}
+		}
+
 	}
 
 
 
 }
+
+
 
 .drop_area {
 	&-input {
@@ -599,6 +658,7 @@ li:hover {
 		font-weight: 700;
 		font-size: 16px;
 		margin-bottom: 20px;
+
 		&:hover,
 		&.is_actif {
 			background-color: #1D6154;
