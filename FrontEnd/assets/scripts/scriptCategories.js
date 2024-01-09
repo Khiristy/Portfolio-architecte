@@ -3,6 +3,7 @@ function categories(dataCategories) {
 
 
 
+
 }
 // 
 // const arrayFigure = document.querySelectorAll("figure")
@@ -20,14 +21,9 @@ const Filter = {
   init: function () {
     this.filter = document.querySelector(".filter")
 
-
     this.arrayFigure = document.querySelectorAll("figure")
 
     this.buttonAllWork = document.getElementById("allWork")
-
-    this.buttonAllWork = document.getElementById("allWork")
-
-
 
     this.request()
 
@@ -36,6 +32,7 @@ const Filter = {
     // this.objectCategories = dataCategories[index]
 
   },
+
   request: function () {
 
     const url = 'http://localhost:5678/api/categories';

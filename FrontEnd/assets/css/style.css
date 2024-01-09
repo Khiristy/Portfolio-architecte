@@ -439,6 +439,9 @@ li:hover {
   border: none;
   font-size: 24px;
 }
+.modale_return.is_hidden {
+  display: none;
+}
 .modale_show {
   z-index: 3;
   opacity: 1;

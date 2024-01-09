@@ -7,6 +7,7 @@ window.addEventListener("load", function () {
 
 //ouverture/fermeture modale
 const Modale = {
+    
     init() {
 
         this.modale = document.getElementById('modale')
@@ -63,6 +64,7 @@ const Modale = {
 //modifie contenu modale
 
 const ProjectEditor = {
+
     init: function () {
 
         this.btnSwitch = document.getElementById('modaleValid');
@@ -73,6 +75,17 @@ const ProjectEditor = {
         this.modaleTitle = document.getElementById('modaleTitle');
         this.modaleGallery = document.getElementById('modaleGallery');
         this.modaleAddWork = document.getElementById('modaleForm');
+
+        this.fileInputImg = document.getElementById('fileInputImg');
+        this.formEditTitle = document.getElementById('formEditTitle');
+        this.formEditCat = document.getElementById('formEditCat');
+        
+
+        this.modaleAddWork.addEventListener('input', (event) => {
+
+            let field = event.target;
+            console.log(field.formEditCat.value);
+        });
 
         this.step = 1
 
@@ -137,6 +150,7 @@ const ProjectEditor = {
         const token = window.localStorage.getItem("tokenConnexion")
 
         const formData = new FormData(document.getElementById('modaleForm'));
+
         const imgUrl = document.getElementById('fileInputImg').getAttribute('src');
         const title = document.getElementById('formEditTitle').value;
         const category = document.getElementById('formEditCat');
@@ -156,6 +170,9 @@ const ProjectEditor = {
         fetch(url, requestOptions)
             .then(response => response.json())
             .then(data => console.log(data))
+            .then(function(data){
+                ProjectEditor.reloadGallery()
+            })
             .catch(error => console.error('Erreur :', error));
 
     },
@@ -172,13 +189,6 @@ const ProjectEditor = {
                 const url = `http://localhost:5678/api/works/${projectId}`;
                 const token = window.localStorage.getItem("tokenConnexion")
 
-                let response = await fetch(url, {
-                    method: "DELETE",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                });
-
                 const headers = {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -192,14 +202,7 @@ const ProjectEditor = {
                         if (response.ok) {
                             console.log(response);
                             console.log("La requête DELETE a été exécutée avec succès.");
-                            const figures = document.querySelectorAll(".modale_gallery-figure")
-                            for (let index = 0; index < figures.length; index++) {
-                                const figure = figures[index];
-                                figure.remove()
-                            }
-                            
-                            ProjectEditor.request()
-
+                            ProjectEditor.reloadGallery()
                         } else {
                             console.error(`Erreur lors de la requête DELETE : ${response.status} - ${response.statusText}`);
                         }
@@ -210,6 +213,17 @@ const ProjectEditor = {
             })
         }
     },
+
+    reloadGallery () {
+
+        const figures = document.querySelectorAll(".modale_gallery-figure")
+        for (let index = 0; index < figures.length; index++) {
+            const figure = figures[index];
+            figure.remove()
+        }
+        ProjectEditor.request()
+    },
+
 
     //*switch Modale*/
 
@@ -237,7 +251,7 @@ const ProjectEditor = {
             }
         })
     },
-
+ 
     gotostep: function (step) {
 
         switch (step) {
@@ -248,6 +262,7 @@ const ProjectEditor = {
                 this.modaleTitle.innerHTML = 'Gallerie photo'
                 this.modaleGallery.classList.remove('is_hidden')
                 this.modaleAddWork.classList.add('is_hidden')
+                this.btnReturn.classList.add('is_hidden')
                 break;
 
             case 2:
@@ -256,6 +271,7 @@ const ProjectEditor = {
                 this.modaleTitle.innerHTML = 'Ajout photo'
                 this.modaleGallery.classList.add('is_hidden')
                 this.modaleAddWork.classList.remove('is_hidden')
+                this.btnReturn.classList.remove('is_hidden')
                 break;
 
             case 3:
@@ -270,7 +286,7 @@ const ProjectEditor = {
 
 
 
-    }
+    },
 }
 
 

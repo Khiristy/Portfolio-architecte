@@ -490,6 +490,9 @@ li:hover {
 		background: transparent;
 		border: none;
 		font-size: 24px;
+		&.is_hidden {
+			display: none;
+		}
 	}
 
 	&_show {
