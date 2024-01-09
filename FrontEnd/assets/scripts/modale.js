@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
 
 //ouverture/fermeture modale
 const Modale = {
-    
+
     init() {
 
         this.modale = document.getElementById('modale')
@@ -79,20 +79,19 @@ const ProjectEditor = {
         this.fileInputImg = document.getElementById('fileInputImg');
         this.formEditTitle = document.getElementById('formEditTitle');
         this.formEditCat = document.getElementById('formEditCat');
-        
 
-        this.modaleAddWork.addEventListener('input', (event) => {
 
-            let field = event.target;
-            console.log(field.formEditCat.value);
-        });
+
+
+
 
         this.step = 1
 
         this.request()
         this.switchModale()
         this.gotostep(this.step)
-        // this.addWorks()
+        // Vérifiez initialement tous les champs lors du chargement de la page
+        this.checkFormModale();
 
     },
 
@@ -144,6 +143,44 @@ const ProjectEditor = {
         }
     },
 
+    checkFormModale() {
+        let allFieldsHaveValues = false;
+
+
+        function checkAllFields() {
+
+            const btnSwitch = document.getElementById('modaleValid');
+
+            if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && this.formEditCat.value.trim() > '1') {
+                allFieldsHaveValues = true;
+                btnSwitch.classList.remove('is_disable');
+            }
+
+            else {
+                allFieldsHaveValues = false;
+                btnSwitch.classList.add('is_disable');
+            }
+
+            return allFieldsHaveValues; 
+        }
+
+        function handleFieldsCheck() {
+
+            if (checkAllFields()) {
+                console.log('Tous les champs ont des valeurs.');
+            } 
+            
+            else {
+                console.log('Au moins un champ est vide.');
+            }
+        }
+
+        this.fileInputImg.addEventListener('input', handleFieldsCheck);
+        this.formEditTitle.addEventListener('input', handleFieldsCheck);
+        this.formEditCat.addEventListener('input', handleFieldsCheck);
+
+    },
+
     addWorks: function () {
 
         const url = 'http://localhost:5678/api/works'
@@ -170,7 +207,7 @@ const ProjectEditor = {
         fetch(url, requestOptions)
             .then(response => response.json())
             .then(data => console.log(data))
-            .then(function(data){
+            .then(function (data) {
                 ProjectEditor.reloadGallery()
             })
             .catch(error => console.error('Erreur :', error));
@@ -214,7 +251,7 @@ const ProjectEditor = {
         }
     },
 
-    reloadGallery () {
+    reloadGallery() {
 
         const figures = document.querySelectorAll(".modale_gallery-figure")
         for (let index = 0; index < figures.length; index++) {
@@ -251,7 +288,7 @@ const ProjectEditor = {
             }
         })
     },
- 
+
     gotostep: function (step) {
 
         switch (step) {
