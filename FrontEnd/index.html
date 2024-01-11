@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="./assets/css/style.css" />
 	<link rel="shortcut icon" href="./assets/icons/78942_maps_maps.png" type="image/x-icon" />
 	<script src="./assets/scripts/requestApi.js"></script>
-	<script src="./assets/scripts/gallery.js"defer></script>
+	<script src="./assets/scripts/gallery.js" defer></script>
 	<script src="./assets/scripts/scriptCategories.js"></script>
 	<script src="./assets/scripts/scriptGallery.js"></script>
 	<script src="./assets/scripts/modale.js" defer></script>
@@ -72,8 +72,8 @@
 			<div class="modale" id="modale">
 				<button class="modale_close" id="modaleClose">&times;</button>
 				<button class="modale_return" id="modaleReturn"><i class="fa-solid fa-arrow-left">
-				</i>
-			</button>
+					</i>
+				</button>
 				<div class="modale_content">
 
 					<h4 class="modale_title" id="modaleTitle"></h4>
@@ -85,18 +85,20 @@
 
 
 
-					<form class="modale_form is_hidden" id="modaleForm" action="#" method="post" enctype="multipart/form-data">
+					<form class="modale_form is_hidden" id="modaleForm" action="#" method="post"
+						enctype="multipart/form-data">
 						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInputImg').click()">
+							<img src="" alt="" class="modale_form-img" id="modaleFormImg"/>
 							<input class="drop_area-input" name="image" type="file" id="fileInputImg" multiple />
 							<div class="modale_background">
-								<i class="fa-regular fa-image"></i>
+								<i class="fa-regular fa-image" id="modalePictoImg"></i>
 								<label>+ Ajouter photo</label>
 								<p class="drop_area-info">jpg, png: 4mo max.</p>
 							</div>
 						</div>
-						<div class="modale_champs" >
+						<div class="modale_champs">
 							<label>Titre</label>
-							<input type="text" name="title" id="formEditTitle"/>
+							<input type="text" name="title" id="formEditTitle" />
 							<label>Catégories</label>
 							<select type="text" name="category" id="formEditCat">
 								<option value="0"></option>
@@ -108,13 +110,19 @@
 						</div>
 					</form>
 
-					<div class="modale_form-check" id="modaleFormCheck">
-						<span class="modale_form-check--pos" id="modaleFormCheckPos"></span>
+					<div class="modale_form-check modale_form-check--true" id="modaleFormCheckTrue">
+						<span><i class="fa-regular fa-circle-check"></i>Le projet à été ajouté avec succès !</span>
 					</div>
-					<hr class="modale_bar"></hr>
+
+					<div class="modale_form-check modale_form-check--false" id="modaleFormCheckFalse">
+						<span><i class="fa-solid fa-circle-xmark"></i>champs saisi incorrect ou manquant</span>
+					</div>
+
+					<hr class="modale_bar">
+					</hr>
 					<button class="modale_btn modale_btn-switch" id="modaleBtnSwitch"></button>
 					<button class="modale_btn modale_btn-valid" id="modaleBtnValid"></button>
-					
+
 				</div>
 			</div>
 			<nav class="filter">
@@ -127,9 +135,9 @@
 			<p>Vous avez un projet ? Discutons-en !</p>
 			<form action="#" method="post">
 				<label for="name">Nom</label>
-				<input type="text" name="name" id="name"/>
+				<input type="text" name="name" id="name" />
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email"/>
+				<input type="email" name="email" id="email" />
 				<label for="message">Message</label>
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<input type="submit" value="Envoyer" />

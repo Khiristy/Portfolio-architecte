@@ -78,26 +78,23 @@ const ProjectEditor = {
         this.modaleTitle = document.getElementById('modaleTitle');
         this.modaleGallery = document.getElementById('modaleGallery');
         this.modaleAddWork = document.getElementById('modaleForm');
-        this.modaleFormCheck = document.getElementById('modaleFormCheck');
+        this.modaleFormCheckTrue = document.getElementById('modaleFormCheckTrue');
+        this.modaleFormCheckFalse = document.getElementById('modaleFormCheckFalse');
         this.modaleFormCheckPos = document.getElementById('modaleFormCheckPos');
 
-
+        this.modaleFormImg = document.getElementById('modaleFormImg');
         this.fileInputImg = document.getElementById('fileInputImg');
         this.formEditTitle = document.getElementById('formEditTitle');
         this.formEditCat = document.getElementById('formEditCat');
 
-
-
-
-
-
         this.step = 1
+
 
         this.request()
         this.switchModale()
         this.gotostep(this.step)
-        // Vérifiez initialement tous les champs lors du chargement de la page
         this.checkFormModale();
+        this.addImgForm();
 
     },
 
@@ -122,6 +119,7 @@ const ProjectEditor = {
     },
 
     buildGallery(data) {
+
         const modaleGallery = document.getElementById('modaleGallery')
         for (let index = 0; index < data.length; index++) {
             const element = data[index];
@@ -131,9 +129,6 @@ const ProjectEditor = {
             const figure = document.createElement("figure")
             modaleGallery.appendChild(figure)
             figure.classList.add('modale_gallery-figure')
-            // figure.setAttribute('id', "projectModale-" + element.id)
-
-
 
             const image = document.createElement("img")
             image.src = imgProject
@@ -150,12 +145,12 @@ const ProjectEditor = {
     },
 
     checkFormModale() {
-        let allFieldsHaveValues = false;
 
+        let allFieldsHaveValues = false;
 
         const checkAllFields = () => {
 
-            if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && this.formEditCat.value.trim() >= 1) {
+            if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && parseInt(this.formEditCat.value.trim()) >= 1) {
                 this.allFieldsHaveValues = true;
                 this.btnValid.classList.remove('is_disable');
             }
@@ -183,6 +178,29 @@ const ProjectEditor = {
         this.formEditTitle.addEventListener('input', handleFieldsCheck);
         this.formEditCat.addEventListener('input', handleFieldsCheck);
 
+    },
+
+    addImgForm() {
+
+        this.fileInputImg.addEventListener('input', () => {
+
+            const file = document.getElementById('fileInputImg').files[0];
+            
+            const reader = new FileReader();
+
+            reader.addEventListener(
+                "load",
+                () => {
+                    this.modaleFormImg.src = reader.result;
+                    console.log(reader.result);
+                },
+                false,
+            );
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
     },
 
     addWorks() {
@@ -265,7 +283,6 @@ const ProjectEditor = {
         ProjectEditor.request()
     },
 
-
     //*switch Modale*/
 
     switchModale() {
@@ -277,14 +294,14 @@ const ProjectEditor = {
         })
 
         this.btnSwitch.addEventListener('click', () => {
-
+            console.log('a');
             if (this.step <= 2) {
                 this.step++
                 this.gotostep(this.step)
             }
         })
         this.btnValid.addEventListener('click', () => {
-
+            console.log('b');
             if (this.step < 3) {
                 this.step++
                 this.gotostep(this.step)
@@ -301,7 +318,7 @@ const ProjectEditor = {
     },
 
     gotostep(step) {
-
+        console.log(step);
         switch (step) {
 
             case 1:
@@ -311,6 +328,8 @@ const ProjectEditor = {
                 this.modaleGallery.classList.remove('is_hidden')
                 this.modaleAddWork.classList.add('is_hidden')
                 this.btnReturn.classList.add('is_hidden')
+                this.modaleFormCheckTrue.classList.remove('is_actif')
+                this.modaleFormCheckFalse.classList.remove('is_actif')
 
                 break;
 
@@ -325,49 +344,32 @@ const ProjectEditor = {
                 this.modaleTitle.innerHTML = 'Ajout photo'
                 this.modaleGallery.classList.add('is_hidden')
                 this.modaleAddWork.classList.remove('is_hidden')
+                this.modaleFormCheckTrue.classList.remove('is_actif')
 
                 break;
 
             case 3:
-                this.modaleFormCheck.classList.add('is_actif')
+
                 if (this.allFieldsHaveValues) {
-                    this.modaleFormCheck.classList.add('is_true')
-                    this.modaleFormCheckPos.innerText = 'Le projet à été ajouté avec succès !'
+                    this.modaleFormCheckTrue.classList.add('is_actif')
 
-                    const icon = document.createElement('i')
-
-                    icon.classList.add("fa-regular")
-                    icon.classList.add("fa-circle-check")
-
-                    this.modaleFormCheckPos.appendChild(icon)
+                    this.addWorks()
+                    this.modaleAddWork.reset()
 
                     setTimeout(() => {
-                        this.addWorks()
-                        this.modale.classList.remove('modale_show')
-                        this.body.classList.remove('overlay')
-    
-                        const modaleGallery = document.getElementById('modaleGallery')
-                        const modaleAddWork = document.getElementById('modaleForm')
-    
-                        modaleGallery.classList.remove('is_hidden')
-                        modaleAddWork.classList.add('is_hidden')
+                        this.modaleFormCheckTrue.classList.remove('is_actif')
+                        this.modaleFormCheckFalse.classList.remove('is_actif')
+                        this.step = 2
+                        this.gotostep(this.step)
                     }, 3000);
-                    
+
                 }
 
                 else {
 
-                    this.modaleFormCheck.classList.add('is_false')
-                    this.modaleFormCheckPos.innerText = 'champs saisi incorrect ou manquant'
-
-                    const icon = document.createElement('i')
-
-                    icon.classList.add("fa-solid")
-                    icon.classList.add("fa-circle-xmark")
-                    this.modaleFormCheckPos.appendChild(icon)
+                    this.modaleFormCheckFalse.classList.add('is_actif')
 
                 }
-
                 break;
 
             default:
