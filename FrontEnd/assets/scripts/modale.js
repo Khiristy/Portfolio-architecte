@@ -84,6 +84,7 @@ const ProjectEditor = {
 
         this.modaleFormImg = document.getElementById('modaleFormImg');
         this.fileInputImg = document.getElementById('fileInputImg');
+        this.modaleLabelPhoto = document.getElementById('modaleLabelPhoto'),
         this.formEditTitle = document.getElementById('formEditTitle');
         this.formEditCat = document.getElementById('formEditCat');
 
@@ -147,12 +148,15 @@ const ProjectEditor = {
     checkFormModale() {
 
         let allFieldsHaveValues = false;
+        this.btnValid.classList.add('is_disable');
 
         const checkAllFields = () => {
 
             if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && parseInt(this.formEditCat.value.trim()) >= 1) {
                 this.allFieldsHaveValues = true;
                 this.btnValid.classList.remove('is_disable');
+                this.modaleFormCheckFalse.classList.remove('is_actif')
+
             }
 
             else {
@@ -179,13 +183,12 @@ const ProjectEditor = {
         this.formEditCat.addEventListener('input', handleFieldsCheck);
 
     },
-
+ 
     addImgForm() {
 
         this.fileInputImg.addEventListener('input', () => {
 
             const file = document.getElementById('fileInputImg').files[0];
-            
             const reader = new FileReader();
 
             reader.addEventListener(
@@ -199,6 +202,7 @@ const ProjectEditor = {
 
             if (file) {
                 reader.readAsDataURL(file);
+                this.modaleLabelPhoto.classList.add('hidden')
             }
         });
     },
@@ -294,14 +298,15 @@ const ProjectEditor = {
         })
 
         this.btnSwitch.addEventListener('click', () => {
-            console.log('a');
+
             if (this.step <= 2) {
                 this.step++
                 this.gotostep(this.step)
             }
         })
+
         this.btnValid.addEventListener('click', () => {
-            console.log('b');
+
             if (this.step < 3) {
                 this.step++
                 this.gotostep(this.step)
@@ -323,7 +328,10 @@ const ProjectEditor = {
 
             case 1:
                 this.btnSwitch.innerHTML = 'Ajouter une photo'
-                this.btnSwitch.classList.remove('is_disable')
+                this.btnSwitch.classList.remove('is_hidden')
+                this.btnValid.classList.remove('is_actif')
+
+
                 this.modaleTitle.innerHTML = 'Gallerie photo'
                 this.modaleGallery.classList.remove('is_hidden')
                 this.modaleAddWork.classList.add('is_hidden')
@@ -334,10 +342,10 @@ const ProjectEditor = {
                 break;
 
             case 2:
+                this.btnValid.innerHTML = 'Valider'
                 this.btnSwitch.classList.add('is_hidden')
                 this.btnReturn.classList.remove('is_hidden')
                 this.btnValid.classList.add('is_actif')
-                this.btnValid.innerHTML = 'Valider'
                 this.btnValid.classList.add('is_disable')
 
 
@@ -345,6 +353,7 @@ const ProjectEditor = {
                 this.modaleGallery.classList.add('is_hidden')
                 this.modaleAddWork.classList.remove('is_hidden')
                 this.modaleFormCheckTrue.classList.remove('is_actif')
+                this.modaleFormCheckFalse.classList.remove('is_actif')
 
                 break;
 
@@ -355,26 +364,24 @@ const ProjectEditor = {
 
                     this.addWorks()
                     this.modaleAddWork.reset()
-
+                    this.allFieldsHaveValues = false
                     setTimeout(() => {
                         this.modaleFormCheckTrue.classList.remove('is_actif')
                         this.modaleFormCheckFalse.classList.remove('is_actif')
                         this.step = 2
                         this.gotostep(this.step)
-                    }, 3000);
-
+                    }, 2000);
                 }
 
                 else {
-
+                    this.step = 2
+                    this.gotostep(this.step)
                     this.modaleFormCheckFalse.classList.add('is_actif')
-
                 }
                 break;
 
             default:
                 console.log('error');
-
                 break;
         }
 
