@@ -1,10 +1,11 @@
-function Gallery(data) {
-  console.log(data);
+function buildGalleryFront(data) {
+  const gallery = document.querySelector(".gallery")
+  gallery.innerHTML = ''
+  
   for (let index = 0; index < data.length; index++) {
 
     const work = data[index];
 
-    const gallery = document.querySelector(".gallery")
     const figure = document.createElement("figure")
     figure.dataset.categoryId = work.categoryId
 

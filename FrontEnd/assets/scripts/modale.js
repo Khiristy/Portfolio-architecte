@@ -115,6 +115,7 @@ const ProjectEditor = {
             .then((data) => {
                 ProjectEditor.buildGallery(data)
                 ProjectEditor.deleteWorks(data)
+                buildGalleryFront(data)
             })
             .catch(error => console.error('Erreur :', error));
     },
@@ -195,7 +196,6 @@ const ProjectEditor = {
                 "load",
                 () => {
                     this.modaleFormImg.src = reader.result;
-                    console.log(reader.result);
                 },
                 false,
             );
@@ -361,10 +361,11 @@ const ProjectEditor = {
 
                 if (this.allFieldsHaveValues) {
                     this.modaleFormCheckTrue.classList.add('is_actif')
-
+                    this.modaleFormImg.src = ''
                     this.addWorks()
                     this.modaleAddWork.reset()
                     this.allFieldsHaveValues = false
+                    this
                     setTimeout(() => {
                         this.modaleFormCheckTrue.classList.remove('is_actif')
                         this.modaleFormCheckFalse.classList.remove('is_actif')
@@ -384,9 +385,6 @@ const ProjectEditor = {
                 console.log('error');
                 break;
         }
-
-
-
 
     },
 }

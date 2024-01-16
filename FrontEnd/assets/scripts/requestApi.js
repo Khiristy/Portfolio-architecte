@@ -28,28 +28,28 @@ function apiLogin() {
 
 
 
-function apiGetWorks() {
+// function apiGetWorks() {
 
-  const url = 'http://localhost:5678/api/works';
+//   const url = 'http://localhost:5678/api/works';
 
 
-  // Configuration de la requête
-  const requestOptions = {
-    method: 'GET', // Méthode de la requête
-    headers: {
-      'Content-Type': 'application/json' // Type de contenu du corps de la requête
-      // Vous pouvez également ajouter d'autres en-têtes ici si nécessaire
-    },
-    // body: "" // Corps de la requête (converti en format JSON)
-  };
+//   // Configuration de la requête
+//   const requestOptions = {
+//     method: 'GET', // Méthode de la requête
+//     headers: {
+//       'Content-Type': 'application/json' // Type de contenu du corps de la requête
+//       // Vous pouvez également ajouter d'autres en-têtes ici si nécessaire
+//     },
+//     // body: "" // Corps de la requête (converti en format JSON)
+//   };
 
-  // Effectuer la requête Fetch
-  fetch(url, requestOptions)
-    .then(response => response.json()) // Analyser la réponse JSON
-    .then(data => Gallery(data)) // Faire quelque chose avec les données
-    .catch(error => console.error('Erreur :', error));
+//   // Effectuer la requête Fetch
+//   fetch(url, requestOptions)
+//     .then(response => response.json()) // Analyser la réponse JSON
+//     .then(data => Gallery(data)) // Faire quelque chose avec les données
+//     .catch(error => console.error('Erreur :', error));
 
-}
+// }
 
 function apiGetCategories() {
 
