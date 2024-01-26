@@ -72,16 +72,16 @@ const Filter = {
   sortProject: function () {
 
 
-    const arrayFigure = document.querySelectorAll(".gallery figure")
     this.buttonFilterList = this.filter.querySelectorAll("button")
     console.log(this.buttonFilterList);
 
     for (let index = 0; index < this.buttonFilterList.length; index++) {
       const button = this.buttonFilterList[index];
       button.addEventListener('click', (e) => {
+        const arrayFigure = document.querySelectorAll(".gallery figure")
+        console.log(arrayFigure)
         const target = e.target
-        console.log(target.dataset.categoryId)
-        console.log(target)
+        // console.log(target.dataset.categoryId)
 
         for (let index = 0; index < arrayFigure.length; index++) {
           const element = arrayFigure[index];
@@ -89,8 +89,11 @@ const Filter = {
           console.log(target.dataset.categoryId);
           if (element.dataset.categoryId !== target.dataset.categoryId) {
             element.classList.add('hidden');
+            console.log('hidden');
           } else {
             element.classList.remove('hidden');
+            console.log('actif');
+
           }
         }
         
@@ -103,6 +106,7 @@ const Filter = {
     }
 
     this.buttonAllWork.addEventListener('click', function () {
+      const arrayFigure = document.querySelectorAll(".gallery figure")
       for (let index = 0; index < arrayFigure.length; index++) {
         const element = arrayFigure[index];
         console.log(element);

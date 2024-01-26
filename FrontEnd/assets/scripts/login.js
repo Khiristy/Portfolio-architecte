@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(login),
-            //   body: new FormData(formLogin),
         });
 
         let result = await response.json();

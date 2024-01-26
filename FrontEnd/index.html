@@ -16,12 +16,12 @@
 	<script src="./assets/scripts/gallery.js" defer></script>
 	<script src="./assets/scripts/scriptCategories.js"></script>
 	<script src="./assets/scripts/scriptGallery.js"></script>
-	<script src="./assets/scripts/modale.js" defer></script>
+	<script src="./assets/scripts/homePageScript.js" defer></script>
 	<script src="https://kit.fontawesome.com/ecfbb69621.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="background_body">
-	<div id="edit" class="edit">
+	<div id="editBar" class="edit">
 		<i class="fa-regular fa-pen-to-square"></i>
 		<button>Mode édition</button>
 	</div>
@@ -32,7 +32,8 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li>login</li>
+				<li class="logout_btn" id="logoutBtn"><a href="#">logout</a></li>
+				<li class="login_btn hidden" id="loginBtn"><a href="connexion.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
 			</ul>
 		</nav>

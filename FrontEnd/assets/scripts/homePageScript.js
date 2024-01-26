@@ -1,6 +1,7 @@
 window.addEventListener("load", function () {
     Modale.init();
     ProjectEditor.init();
+    Connexion.init();
 })
 
 
@@ -389,6 +390,46 @@ const ProjectEditor = {
     },
 }
 
+const Connexion = {
+    
+    init() {
 
+        this.loginBtn = document.getElementById('loginBtn')
+        this.logoutBtn = document.getElementById('logoutBtn')
+        this.token = window.localStorage.getItem("tokenConnexion")
+        this.modaleOpen = document.getElementById('modaleOpen')
+        this.editBar = document.getElementById('editBar')
 
+        this.resetConnexion()
+        this.editMod()
+    },
 
+    request() {
+
+    },
+
+    async editMod () {
+
+        if (this.token !== undefined && this.token !== null) {
+            this.modaleOpen.classList.remove('hidden')
+            this.editBar.classList.remove('hidden')
+            this.logoutBtn.classList.remove('hidden')
+            this.loginBtn.classList.add('hidden')
+
+        }
+        else {
+            this.modaleOpen.classList.add('hidden')
+            this.editBar.classList.add('hidden')
+            this.logoutBtn.classList.add('hidden')
+            this.loginBtn.classList.remove('hidden')
+        }
+    },
+
+    resetConnexion() {
+
+        this.logoutBtn.addEventListener('click',() => {
+            this.token = window.localStorage.removeItem("tokenConnexion")
+            this.editMod()
+        })
+    },
+}

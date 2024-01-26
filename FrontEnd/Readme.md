@@ -10,18 +10,11 @@ ne pas mettre Content-type: application json dans les paramètres de requête
 
            reste a faire
 
-finir css connexion.html/index.html
+bouton 'login': 
+renvoie sur la page de connexion => passe strong sur la page de co
 
-ajout hover filtre travaux
 
-voir fermeture modale
+if log true => btn logout
+add black bar top 
+add modale
 
-debug interaction filtre et modale
-
-un message d’erreur si le formulaire n’est pas correctement rempli.
-
-Une réponse de l’API si le formulaire est correctement envoyé.
-
-Si je recharge la page, le nouveau projet qui doit s’afficher dans la galerie
-
-L’ajout dynamique du projet dans la galerie après l’envoi du formulaire.

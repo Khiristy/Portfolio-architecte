@@ -23,7 +23,8 @@
       <ul>
         <li>projets</li>
         <li>contact</li>
-        <li>login</li>
+        <li class="logout_btn hidden" id="logoutBtn"><a href="#">logout</a></li>
+				<li class="login_btn strong" id="loginBtn"><a href="#">login</a></li>
         <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
       </ul>
     </nav>
@@ -35,12 +36,28 @@
         <label>E-mail</label>
         <input id="email" type="email" name="email" placeholder="exemple@gmail.com" />
         <label>Mot de passe</label>
-        <input id="password" type="password" name="password" placeholder="qdqasfgvzgv" value="S0phie" />
+        <input id="password" type="password" name="password" placeholder="mot de passe" value="S0phie" />
       </div>
       <button type="submit" class="form_connexion">Se connecter</button>
         <a class="form_forgot-password">Mot de passe oublié</a>
     </form>
-    <p id="loginResult"></p>
+    <div class="log_result-check" id="loginResult"></div>
+
+    <div class="log_result-check log_result-check--true" id="modaleFormCheckTrue">
+      <span><i class="fa-regular fa-circle-check"></i>Le projet à été ajouté avec succès !</span>
+    </div>
+
+    <div class="log_result-check log_result-check--false" id="modaleFormCheckFalse">
+      <span><i class="fa-solid fa-circle-xmark"></i>champs saisi incorrect ou manquant</span>
+    </div>
+
+
+
+
+
+
+
+
   </main>
 </body>
 <footer class="background_footer background_footer-connexion">
