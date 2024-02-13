@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // apiLogin()
 
     const formLogin = document.getElementById("formlogin");
 
@@ -28,17 +27,23 @@ document.addEventListener("DOMContentLoaded", function () {
         window.localStorage.setItem("tokenConnexion", result.token);
         window.localStorage.setItem("userId", result.userId);
 
-        if (result.token !== undefined) {
-           const loginResult = document.getElementById('loginResult')
-            loginResult.innerText = "Vous etes maintenant connecté"
-            setTimeout(() => {
+        const capsuleFalse = document.getElementById('capsuleFalse')
+        const capsuleTrue = document.getElementById('capsuleTrue')
 
+
+        if (result.token !== undefined) {
+           capsuleTrue.classList.remove('hidden')
+           capsuleFalse.classList.add('hidden')
+
+            setTimeout(() => {
                 window.location.href = "index.html"
-            }, 3000);
+            }, 1500);
             
         }
         else {
-            loginResult.innerText = "L'email ou le mot de passe est incorrect"
+            capsuleFalse.classList.remove('hidden')
+            capsuleTrue.classList.add('hidden')
+
         }
     });
 });

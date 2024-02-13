@@ -201,6 +201,9 @@ header {
   flex-direction: column;
   align-items: center;
 }
+.form_content .capsule {
+  margin-top: 25px;
+}
 .form_title {
   padding-bottom: 20px;
 }
@@ -314,41 +317,34 @@ li:hover {
   text-align: center;
 }
 
-.log_result-check {
-  width: 60%;
+.capsule {
+  width: fit-content;
+  padding: 0 25px 0 15px;
   height: 50px;
   border-radius: 60px;
   text-align: center;
-  position: absolute;
-  bottom: 20%;
-  left: 50%;
-  translate: -50% 0%;
+  transition: all 0.3s;
 }
-.log_result-check span {
+.capsule span {
   position: relative;
   top: 4px;
 }
-.log_result-check i {
+.capsule i {
   position: relative;
-  right: 17px;
-  top: 5px;
+  right: 6px;
+  top: 6px;
   font-size: 28px;
 }
-.log_result-check--true {
-  opacity: 0;
+.capsule_true {
   background-color: #1D6154;
   color: white;
 }
-.log_result-check--true.is_actif {
-  opacity: 1;
-}
-.log_result-check--false {
-  opacity: 0;
+.capsule_false {
   background-color: #8B0000;
   color: white;
 }
-.log_result-check--false.is_actif {
-  opacity: 1;
+.capsule.hidden {
+  opacity: 0;
 }
 
 .modale {
@@ -356,13 +352,13 @@ li:hover {
   width: 630px;
   min-height: 670px;
   position: fixed;
-  top: 50%;
+  top: 0;
   left: 50%;
   translate: -50% -50%;
   border-radius: 10px;
   z-index: -1;
   opacity: 0;
-  transition: 1s;
+  transition: all 0.8s;
 }
 .modale_form {
   position: relative;
@@ -381,41 +377,9 @@ li:hover {
 .modale_form-img:not([src]) {
   visibility: hidden;
 }
-.modale_form-check {
-  width: 60%;
-  height: 50px;
-  border-radius: 60px;
-  text-align: center;
+.modale .capsule {
   position: absolute;
-  bottom: 20%;
-  left: 50%;
-  translate: -50% 0%;
-}
-.modale_form-check span {
-  position: relative;
-  top: 4px;
-}
-.modale_form-check i {
-  position: relative;
-  right: 17px;
-  top: 5px;
-  font-size: 28px;
-}
-.modale_form-check--true {
-  opacity: 0;
-  background-color: #1D6154;
-  color: white;
-}
-.modale_form-check--true.is_actif {
-  opacity: 1;
-}
-.modale_form-check--false {
-  opacity: 0;
-  background-color: #8B0000;
-  color: white;
-}
-.modale_form-check--false.is_actif {
-  opacity: 1;
+  bottom: 133px;
 }
 .modale_gallery {
   margin-top: 40px;
@@ -544,6 +508,7 @@ li:hover {
 .modale_show {
   z-index: 3;
   opacity: 1;
+  top: 50%;
 }
 .modale_bar {
   border: none;
@@ -640,6 +605,7 @@ li:hover {
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 20px;
+  transition: all 0.3s;
 }
 .filter button:hover, .filter button.is_actif {
   background-color: #1D6154;
@@ -658,8 +624,15 @@ li:hover {
   grid-row-gap: 20px;
 }
 
-.gallery img {
+.project {
+  overflow: hidden;
+}
+.project img {
   width: 100%;
+  transition: all 0.3s;
+}
+.project img:hover {
+  scale: 1.1;
 }
 
 #contact {

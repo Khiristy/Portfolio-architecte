@@ -12,8 +12,8 @@
   <meta name="description" content="" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="shortcut icon" href="./assets/icons/78942_maps_maps.png" type="image/x-icon" />
-  <script src="./assets/scripts/requestApi.js"></script>
   <script refer src="./assets/scripts/login.js"></script>
+  <script src="https://kit.fontawesome.com/ecfbb69621.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="background_body">
@@ -41,23 +41,14 @@
       <button type="submit" class="form_connexion">Se connecter</button>
         <a class="form_forgot-password">Mot de passe oublié</a>
     </form>
-    <div class="log_result-check" id="loginResult"></div>
 
-    <div class="log_result-check log_result-check--true" id="modaleFormCheckTrue">
-      <span><i class="fa-regular fa-circle-check"></i>Le projet à été ajouté avec succès !</span>
+    <div class="capsule capsule_true hidden" id="capsuleTrue">
+      <span><i class="fa-regular fa-circle-check"></i>Vous etes maintenant connecté</span>
     </div>
 
-    <div class="log_result-check log_result-check--false" id="modaleFormCheckFalse">
-      <span><i class="fa-solid fa-circle-xmark"></i>champs saisi incorrect ou manquant</span>
+    <div class="capsule capsule_false hidden" id="capsuleFalse">
+      <span><i class="fa-solid fa-circle-xmark"></i>L'email ou le mot de passe est incorrect</span>
     </div>
-
-
-
-
-
-
-
-
   </main>
 </body>
 <footer class="background_footer background_footer-connexion">

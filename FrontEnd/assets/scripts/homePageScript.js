@@ -2,6 +2,7 @@ window.addEventListener("load", function () {
     Modale.init();
     ProjectEditor.init();
     Connexion.init();
+    Filter.init();
 })
 
 
@@ -61,7 +62,103 @@ const Modale = {
     },
 }
 
+const Filter = {
 
+    init: function () {
+        this.filter = document.querySelector(".filter")
+
+        this.arrayFigure = document.querySelectorAll("figure")
+
+        this.buttonAllWork = document.getElementById("allWork")
+
+        this.request()
+
+
+    },
+
+    request: function () {
+
+        const url = 'http://localhost:5678/api/categories';
+
+
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => this.buildFilter(data))
+            .catch(error => console.error('Erreur :', error));
+    },
+
+    buildFilter: function (data) {
+        for (let index = 0; index < data.length; index++) {
+
+            const objectCategories = data[index];
+            const button = document.createElement("button");
+
+            button.innerText = objectCategories.name
+
+            this.filter.appendChild(button)
+
+            button.dataset.categoryId = objectCategories.id
+        }
+        this.sortProject()
+    },
+
+    sortProject: function () {
+
+
+        this.buttonFilterList = this.filter.querySelectorAll("button")
+        console.log(this.buttonFilterList);
+
+        for (let index = 0; index < this.buttonFilterList.length; index++) {
+            const button = this.buttonFilterList[index];
+            button.addEventListener('click', (e) => {
+                const arrayFigure = document.querySelectorAll(".gallery figure")
+                console.log(arrayFigure)
+                const target = e.target
+                // console.log(target.dataset.categoryId)
+
+                for (let index = 0; index < arrayFigure.length; index++) {
+                    const element = arrayFigure[index];
+                    console.log(element);
+                    console.log(target.dataset.categoryId);
+                    if (element.dataset.categoryId !== target.dataset.categoryId) {
+                        element.classList.add('hidden');
+                        console.log('hidden');
+                    } else {
+                        element.classList.remove('hidden');
+                        console.log('actif');
+
+                    }
+                }
+
+                for (let index = 0; index < this.buttonFilterList.length; index++) {
+                    const button = this.buttonFilterList[index];
+                    button.classList.remove('is_actif');
+                }
+                button.classList.add('is_actif');
+            })
+        }
+
+        this.buttonAllWork.addEventListener('click', function () {
+            const arrayFigure = document.querySelectorAll(".gallery figure")
+            for (let index = 0; index < arrayFigure.length; index++) {
+                const element = arrayFigure[index];
+                console.log(element);
+                console.log(this.dataset.categoryId);
+                element.classList.remove('hidden');
+            }
+            this.classList.add('is_actif')
+        })
+    },
+
+}
 //modifie contenu modale
 
 const ProjectEditor = {
@@ -70,6 +167,7 @@ const ProjectEditor = {
 
         this.modale = document.getElementById('modale');
         this.body = document.body
+        this.gallery = document.querySelector(".gallery")
         this.btnSwitch = document.getElementById('modaleBtnSwitch');
         this.btnValid = document.getElementById('modaleBtnValid');
         this.btnReturn = document.getElementById('modaleReturn');
@@ -79,14 +177,13 @@ const ProjectEditor = {
         this.modaleTitle = document.getElementById('modaleTitle');
         this.modaleGallery = document.getElementById('modaleGallery');
         this.modaleAddWork = document.getElementById('modaleForm');
-        this.modaleFormCheckTrue = document.getElementById('modaleFormCheckTrue');
-        this.modaleFormCheckFalse = document.getElementById('modaleFormCheckFalse');
-        this.modaleFormCheckPos = document.getElementById('modaleFormCheckPos');
+        this.capsuleTrue = document.getElementById('capsuleTrue');
+        this.capsuleFalse = document.getElementById('capsuleFalse');
 
         this.modaleFormImg = document.getElementById('modaleFormImg');
         this.fileInputImg = document.getElementById('fileInputImg');
         this.modaleLabelPhoto = document.getElementById('modaleLabelPhoto'),
-        this.formEditTitle = document.getElementById('formEditTitle');
+            this.formEditTitle = document.getElementById('formEditTitle');
         this.formEditCat = document.getElementById('formEditCat');
 
         this.step = 1
@@ -116,9 +213,35 @@ const ProjectEditor = {
             .then((data) => {
                 ProjectEditor.buildGallery(data)
                 ProjectEditor.deleteWorks(data)
-                buildGalleryFront(data)
+                ProjectEditor.buildGalleryFront(data)
             })
             .catch(error => console.error('Erreur :', error));
+    },
+
+    buildGalleryFront(data) {
+
+        this.gallery.innerHTML = ''
+
+        for (let index = 0; index < data.length; index++) {
+
+            const work = data[index];
+
+            const figure = document.createElement("figure")
+            figure.dataset.categoryId = work.categoryId
+            figure.classList.add("project")
+
+            const img = document.createElement("img")
+            img.src = work.imageUrl
+            img.alt = work.title
+
+            const figcaption = document.createElement("figcaption")
+            figcaption.innerText = work.title
+
+            this.gallery.appendChild(figure)
+            figure.appendChild(img)
+            figure.appendChild(figcaption)
+
+        }
     },
 
     buildGallery(data) {
@@ -157,7 +280,7 @@ const ProjectEditor = {
             if (this.fileInputImg.value.trim() !== '' && this.formEditTitle.value.trim() !== '' && parseInt(this.formEditCat.value.trim()) >= 1) {
                 this.allFieldsHaveValues = true;
                 this.btnValid.classList.remove('is_disable');
-                this.modaleFormCheckFalse.classList.remove('is_actif')
+                this.capsuleFalse.classList.add('hidden')
 
             }
 
@@ -185,7 +308,7 @@ const ProjectEditor = {
         this.formEditCat.addEventListener('input', handleFieldsCheck);
 
     },
- 
+
     addImgForm() {
 
         this.fileInputImg.addEventListener('input', () => {
@@ -337,8 +460,8 @@ const ProjectEditor = {
                 this.modaleGallery.classList.remove('is_hidden')
                 this.modaleAddWork.classList.add('is_hidden')
                 this.btnReturn.classList.add('is_hidden')
-                this.modaleFormCheckTrue.classList.remove('is_actif')
-                this.modaleFormCheckFalse.classList.remove('is_actif')
+                this.capsuleTrue.classList.add('hidden')
+                this.capsuleFalse.classList.add('hidden')
 
                 break;
 
@@ -353,23 +476,20 @@ const ProjectEditor = {
                 this.modaleTitle.innerHTML = 'Ajout photo'
                 this.modaleGallery.classList.add('is_hidden')
                 this.modaleAddWork.classList.remove('is_hidden')
-                this.modaleFormCheckTrue.classList.remove('is_actif')
-                this.modaleFormCheckFalse.classList.remove('is_actif')
-
                 break;
 
             case 3:
 
                 if (this.allFieldsHaveValues) {
-                    this.modaleFormCheckTrue.classList.add('is_actif')
+                    this.capsuleTrue.classList.remove('hidden')
                     this.modaleFormImg.src = ''
                     this.addWorks()
                     this.modaleAddWork.reset()
                     this.allFieldsHaveValues = false
                     this
                     setTimeout(() => {
-                        this.modaleFormCheckTrue.classList.remove('is_actif')
-                        this.modaleFormCheckFalse.classList.remove('is_actif')
+                        this.capsuleTrue.classList.add('hidden')
+                        this.capsuleFalse.classList.add('hidden')
                         this.step = 2
                         this.gotostep(this.step)
                     }, 2000);
@@ -378,7 +498,7 @@ const ProjectEditor = {
                 else {
                     this.step = 2
                     this.gotostep(this.step)
-                    this.modaleFormCheckFalse.classList.add('is_actif')
+                    this.capsuleFalse.classList.remove('hidden')
                 }
                 break;
 
@@ -391,7 +511,7 @@ const ProjectEditor = {
 }
 
 const Connexion = {
-    
+
     init() {
 
         this.loginBtn = document.getElementById('loginBtn')
@@ -399,22 +519,20 @@ const Connexion = {
         this.token = window.localStorage.getItem("tokenConnexion")
         this.modaleOpen = document.getElementById('modaleOpen')
         this.editBar = document.getElementById('editBar')
+        this.filter = document.getElementById('filter')
 
         this.resetConnexion()
         this.editMod()
     },
 
-    request() {
-
-    },
-
-    async editMod () {
+    async editMod() {
 
         if (this.token !== undefined && this.token !== null) {
             this.modaleOpen.classList.remove('hidden')
             this.editBar.classList.remove('hidden')
             this.logoutBtn.classList.remove('hidden')
             this.loginBtn.classList.add('hidden')
+            this.filter.classList.remove('hidden')
 
         }
         else {
@@ -422,12 +540,14 @@ const Connexion = {
             this.editBar.classList.add('hidden')
             this.logoutBtn.classList.add('hidden')
             this.loginBtn.classList.remove('hidden')
+            this.filter.classList.add('hidden')
+
         }
     },
 
     resetConnexion() {
 
-        this.logoutBtn.addEventListener('click',() => {
+        this.logoutBtn.addEventListener('click', () => {
             this.token = window.localStorage.removeItem("tokenConnexion")
             this.editMod()
         })

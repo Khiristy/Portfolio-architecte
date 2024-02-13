@@ -12,10 +12,6 @@
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="./assets/css/style.css" />
 	<link rel="shortcut icon" href="./assets/icons/78942_maps_maps.png" type="image/x-icon" />
-	<script src="./assets/scripts/requestApi.js"></script>
-	<script src="./assets/scripts/gallery.js" defer></script>
-	<script src="./assets/scripts/scriptCategories.js"></script>
-	<script src="./assets/scripts/scriptGallery.js"></script>
 	<script src="./assets/scripts/homePageScript.js" defer></script>
 	<script src="https://kit.fontawesome.com/ecfbb69621.js" crossorigin="anonymous"></script>
 </head>
@@ -79,12 +75,7 @@
 
 					<h4 class="modale_title" id="modaleTitle"></h4>
 
-
-
 					<div class="modale_gallery" id="modaleGallery"></div>
-
-
-
 
 					<form class="modale_form is_hidden" id="modaleForm" action="#" method="post"
 						enctype="multipart/form-data">
@@ -111,11 +102,11 @@
 						</div>
 					</form>
 
-					<div class="modale_form-check modale_form-check--true" id="modaleFormCheckTrue">
+					<div class="capsule capsule_true" id="capsuleTrue">
 						<span><i class="fa-regular fa-circle-check"></i>Le projet à été ajouté avec succès !</span>
 					</div>
 
-					<div class="modale_form-check modale_form-check--false" id="modaleFormCheckFalse">
+					<div class="capsule capsule_false" id="capsuleFalse">
 						<span><i class="fa-solid fa-circle-xmark"></i>champs saisi incorrect ou manquant</span>
 					</div>
 
@@ -126,7 +117,7 @@
 
 				</div>
 			</div>
-			<nav class="filter">
+			<nav class="filter" id="filter">
 				<button class="is_actif" id="allWork">Tous</button>
 			</nav>
 			<div class="gallery"></div>
