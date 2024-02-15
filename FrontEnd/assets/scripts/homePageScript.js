@@ -80,8 +80,6 @@ const Filter = {
 
         const url = 'http://localhost:5678/api/categories';
 
-
-
         const requestOptions = {
             method: 'GET',
             headers: {
@@ -189,7 +187,8 @@ const ProjectEditor = {
         this.step = 1
 
 
-        this.request()
+        this.requestWorks()
+        this.requestCategories()
         this.switchModale()
         this.gotostep(this.step)
         this.checkFormModale();
@@ -197,7 +196,7 @@ const ProjectEditor = {
 
     },
 
-    request() {
+    requestWorks() {
 
         const url = 'http://localhost:5678/api/works';
 
@@ -215,6 +214,23 @@ const ProjectEditor = {
                 ProjectEditor.deleteWorks(data)
                 ProjectEditor.buildGalleryFront(data)
             })
+            .catch(error => console.error('Erreur :', error));
+    },
+
+    requestCategories() {
+
+        const url = 'http://localhost:5678/api/categories';
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => this.buildSelectCategories(data))
             .catch(error => console.error('Erreur :', error));
     },
 
@@ -267,6 +283,18 @@ const ProjectEditor = {
             trashImg.classList.add("modale_gallery-trash")
             trashImg.setAttribute("data-id", element.id)
             figure.appendChild(trashImg)
+        }
+    },
+
+    buildSelectCategories(data) {
+
+
+        for (let index = 0; index < data.length; index++) {
+            const categorie = data[index];
+            const option = document.createElement('option')
+            option.value = categorie.id
+            option.innerHTML = categorie.name
+            this.formEditCat.appendChild(option)
         }
     },
 
@@ -408,7 +436,7 @@ const ProjectEditor = {
             const figure = figures[index];
             figure.remove()
         }
-        ProjectEditor.request()
+        ProjectEditor.requestWorks()
     },
 
     //*switch Modale*/
