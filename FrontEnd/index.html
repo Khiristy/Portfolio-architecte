@@ -26,8 +26,8 @@
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<li><a href="index.html#projets">projets</a></li>
-				<li><a href="index.html#contact">contact</a></li>
+				<li><a class="lien_interne" href="index.html?destination=projets">projets</a></li>
+				<li><a class="lien_interne" href="index.html?destination=contact">contact</a></li>
 				<li class="logout_btn" id="logoutBtn"><a href="#">logout</a></li>
 				<li class="login_btn hidden" id="loginBtn"><a href="connexion.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
@@ -105,6 +105,15 @@
 					<div class="capsule capsule_false" id="capsuleFalse">
 						<span><i class="fa-solid fa-circle-xmark"></i>champs saisi incorrect ou manquant</span>
 					</div>
+
+					<div class="capsule capsule_false hidden" id="capsuleFalseSize">
+						<span><i class="fa-solid fa-circle-xmark"></i>L'image ne doit pas dépasser 4 Mo.</span>
+					</div>
+
+					<div class="capsule capsule_false hidden" id="capsuleFalseType">
+						<span><i class="fa-solid fa-circle-xmark"></i>L'image doit être au format PNG ou JPG.</span>
+					</div>
+					
 
 					<hr class="modale_bar">
 					</hr>

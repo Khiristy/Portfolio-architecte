@@ -394,7 +394,13 @@ li:hover {
 .modale_gallery-figure {
   position: relative;
 }
+.modale_gallery fa-solid {
+  display: block;
+}
 .modale_gallery-trash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 7px;
   right: 5px;
@@ -404,9 +410,6 @@ li:hover {
   height: 17px;
   border-radius: 2px;
   font-size: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .modale_gallery img {
   width: 76.61px;

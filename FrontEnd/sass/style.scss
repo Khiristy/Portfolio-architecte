@@ -351,6 +351,7 @@ li:hover {
 	border-radius: 60px;
 	text-align: center;
 	transition: all .3s;
+	
 
 	span {
 		position: relative;
@@ -436,7 +437,14 @@ li:hover {
 			position: relative;
 		}
 
+		& fa-solid {
+			display: block;
+		}
+
 		&-trash {
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			position: absolute;
 			top: 7px;
 			right: 5px;
@@ -446,9 +454,8 @@ li:hover {
 			height: 17px;
 			border-radius: 2px;
 			font-size: 11px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			
+
 		}
 
 		& img {

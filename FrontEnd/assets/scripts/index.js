@@ -177,11 +177,13 @@ const ProjectEditor = {
         this.modaleAddWork = document.getElementById('modaleForm');
         this.capsuleTrue = document.getElementById('capsuleTrue');
         this.capsuleFalse = document.getElementById('capsuleFalse');
+        this.capsuleFalseSize = document.getElementById('capsuleFalseSize');
+        this.capsuleFalseType = document.getElementById('capsuleFalseType');
 
         this.modaleFormImg = document.getElementById('modaleFormImg');
         this.fileInputImg = document.getElementById('fileInputImg');
         this.modaleLabelPhoto = document.getElementById('modaleLabelPhoto'),
-            this.formEditTitle = document.getElementById('formEditTitle');
+        this.formEditTitle = document.getElementById('formEditTitle');
         this.formEditCat = document.getElementById('formEditCat');
 
         this.step = 1
@@ -193,6 +195,7 @@ const ProjectEditor = {
         this.gotostep(this.step)
         this.checkFormModale();
         this.addImgForm();
+        this.checkImgImportModaleFormat();
 
     },
 
@@ -319,6 +322,7 @@ const ProjectEditor = {
 
             return this.allFieldsHaveValues;
         }
+        
 
         function handleFieldsCheck() {
 
@@ -334,29 +338,42 @@ const ProjectEditor = {
         this.fileInputImg.addEventListener('input', handleFieldsCheck);
         this.formEditTitle.addEventListener('input', handleFieldsCheck);
         this.formEditCat.addEventListener('input', handleFieldsCheck);
-
+        
     },
 
     addImgForm() {
-
         this.fileInputImg.addEventListener('input', () => {
-
-            const file = document.getElementById('fileInputImg').files[0];
+            const imgImportModale = document.getElementById('fileInputImg').files[0];
             const reader = new FileReader();
-
-            reader.addEventListener(
-                "load",
-                () => {
-                    this.modaleFormImg.src = reader.result;
-                },
-                false,
-            );
-
-            if (file) {
-                reader.readAsDataURL(file);
-                this.modaleLabelPhoto.classList.add('hidden')
+    
+            reader.addEventListener("load", () => {
+                this.modaleFormImg.src = reader.result;
+                this.checkImgImportModaleFormat(imgImportModale);
+            });
+    
+            if (imgImportModale) {
+                reader.readAsDataURL(imgImportModale);
+                this.modaleLabelPhoto.classList.add('hidden');
             }
         });
+    },
+    
+    checkImgImportModaleFormat(imgImportModale) {
+        if (imgImportModale) {
+            console.log(imgImportModale);
+    
+            if (imgImportModale.size > 4 * 1024 * 1024) {
+                this.capsuleFalseSize.classList.remove('hidden');
+            } else {
+                this.capsuleFalseSize.classList.add('hidden');
+            }
+    
+            if (!imgImportModale.type.match(/image\/(png|jpg|jpeg)/)) {
+                this.capsuleFalseType.classList.remove('hidden');
+            } else {
+                this.capsuleFalseType.classList.add('hidden');
+            }
+        }
     },
 
     addWorks() {
@@ -551,6 +568,8 @@ const Connexion = {
 
         this.resetConnexion()
         this.editMod()
+        this.contactRedirection()
+        this.projetRedirection()
     },
 
     async editMod() {
@@ -580,4 +599,28 @@ const Connexion = {
             this.editMod()
         })
     },
+
+    contactRedirection() {
+
+        let params = new URLSearchParams(window.location.search);
+        let destination = params.get('destination');
+        if (destination === 'contact') {
+            setTimeout(() => {
+                document.getElementById('contact').scrollIntoView({ behavior: "smooth"});
+            }, 250);
+        }
+    },
+
+    projetRedirection() {
+        
+        let params = new URLSearchParams(window.location.search);
+        let destination = params.get('destination');
+        if (destination === 'projets') {
+            setTimeout(() => {
+                document.getElementById('projets').scrollIntoView({ behavior: "smooth"});
+            }, 250);
+        }
+    },
+
 }
+
