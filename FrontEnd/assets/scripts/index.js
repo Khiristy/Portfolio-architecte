@@ -3,6 +3,8 @@ window.addEventListener("load", function () {
     ProjectEditor.init();
     Connexion.init();
     Filter.init();
+    history.replaceState(null, null, "index.html");
+    window.scrollTo(0, 0);
 })
 
 
@@ -183,7 +185,7 @@ const ProjectEditor = {
         this.modaleFormImg = document.getElementById('modaleFormImg');
         this.fileInputImg = document.getElementById('fileInputImg');
         this.modaleLabelPhoto = document.getElementById('modaleLabelPhoto'),
-        this.formEditTitle = document.getElementById('formEditTitle');
+            this.formEditTitle = document.getElementById('formEditTitle');
         this.formEditCat = document.getElementById('formEditCat');
 
         this.step = 1
@@ -322,7 +324,7 @@ const ProjectEditor = {
 
             return this.allFieldsHaveValues;
         }
-        
+
 
         function handleFieldsCheck() {
 
@@ -338,36 +340,36 @@ const ProjectEditor = {
         this.fileInputImg.addEventListener('input', handleFieldsCheck);
         this.formEditTitle.addEventListener('input', handleFieldsCheck);
         this.formEditCat.addEventListener('input', handleFieldsCheck);
-        
+
     },
 
     addImgForm() {
         this.fileInputImg.addEventListener('input', () => {
             const imgImportModale = document.getElementById('fileInputImg').files[0];
             const reader = new FileReader();
-    
+
             reader.addEventListener("load", () => {
                 this.modaleFormImg.src = reader.result;
                 this.checkImgImportModaleFormat(imgImportModale);
             });
-    
+
             if (imgImportModale) {
                 reader.readAsDataURL(imgImportModale);
                 this.modaleLabelPhoto.classList.add('hidden');
             }
         });
     },
-    
+
     checkImgImportModaleFormat(imgImportModale) {
         if (imgImportModale) {
             console.log(imgImportModale);
-    
+
             if (imgImportModale.size > 4 * 1024 * 1024) {
                 this.capsuleFalseSize.classList.remove('hidden');
             } else {
                 this.capsuleFalseSize.classList.add('hidden');
             }
-    
+
             if (!imgImportModale.type.match(/image\/(png|jpg|jpeg)/)) {
                 this.capsuleFalseType.classList.remove('hidden');
             } else {
@@ -570,6 +572,7 @@ const Connexion = {
         this.editMod()
         this.contactRedirection()
         this.projetRedirection()
+        this.RedirectionModule()
     },
 
     async editMod() {
@@ -600,24 +603,62 @@ const Connexion = {
         })
     },
 
+    RedirectionModule () {
+
+        let projetsScrollCompleted = false;
+    
+        function scrollToProjets() {
+            document.getElementById('projets').scrollIntoView({ behavior: "smooth" });
+        }
+    
+        window.addEventListener('scroll', () => {
+            if (!projetsScrollCompleted && window.scrollY > 0) {
+                projetsScrollCompleted = true;
+                Connexion.contactRedirection();
+            }
+        });
+    
+        function contactRedirection() {
+            let params = new URLSearchParams(window.location.search);
+            let destination = params.get('destination');
+    
+            if (destination === 'contact' && projetsScrollCompleted) {
+                setTimeout(() => {
+                    document.getElementById('contact').scrollIntoView({ behavior: "smooth" });
+                }, 250);
+            }
+        }
+    
+        function init() {
+            window.addEventListener('load', () => {
+                scrollToProjets();
+            });
+        }
+    
+        return {
+            init: init
+        };
+    },
     contactRedirection() {
 
         let params = new URLSearchParams(window.location.search);
         let destination = params.get('destination');
-        if (destination === 'contact') {
+
+        if (destination === 'contact' && window.scrollY === 0) {
             setTimeout(() => {
-                document.getElementById('contact').scrollIntoView({ behavior: "smooth"});
+                document.getElementById('contact').scrollIntoView({ behavior: "smooth" });
             }, 250);
         }
+
     },
 
     projetRedirection() {
-        
+
         let params = new URLSearchParams(window.location.search);
         let destination = params.get('destination');
         if (destination === 'projets') {
             setTimeout(() => {
-                document.getElementById('projets').scrollIntoView({ behavior: "smooth"});
+                document.getElementById('projets').scrollIntoView({ behavior: "smooth" });
             }, 250);
         }
     },
