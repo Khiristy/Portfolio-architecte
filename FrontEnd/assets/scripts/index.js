@@ -256,8 +256,8 @@ const ProjectEditor = {
             this.gallery.appendChild(figure)
             figure.appendChild(img)
             figure.appendChild(figcaption)
-
         }
+        console.log(data);
     },
 
     buildGallery(data) {
@@ -560,7 +560,7 @@ const Connexion = {
             this.editBar.classList.remove('hidden')
             this.logoutBtn.classList.remove('hidden')
             this.loginBtn.classList.add('hidden')
-            this.filter.classList.remove('hidden')
+            this.filter.classList.add('hidden')
 
         }
         else {
@@ -568,7 +568,7 @@ const Connexion = {
             this.editBar.classList.add('hidden')
             this.logoutBtn.classList.add('hidden')
             this.loginBtn.classList.remove('hidden')
-            this.filter.classList.add('hidden')
+            this.filter.classList.remove('hidden')
 
         }
     },

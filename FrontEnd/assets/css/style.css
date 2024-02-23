@@ -398,6 +398,15 @@ li:hover {
   position: absolute;
   top: 7px;
   right: 5px;
+  background-color: black;
+  color: white;
+  width: 17px;
+  height: 17px;
+  border-radius: 2px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .modale_gallery img {
   width: 76.61px;

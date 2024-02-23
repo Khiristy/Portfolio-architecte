@@ -211,7 +211,7 @@ header {
 		align-items: center;
 
 		.capsule {
-		margin-top: 25px;
+			margin-top: 25px;
 		}
 	}
 
@@ -373,6 +373,7 @@ li:hover {
 		background-color: #8B0000;
 		color: white;
 	}
+
 	&.hidden {
 		opacity: 0;
 	}
@@ -439,6 +440,15 @@ li:hover {
 			position: absolute;
 			top: 7px;
 			right: 5px;
+			background-color: black;
+			color: white;
+			width: 17px;
+			height: 17px;
+			border-radius: 2px;
+			font-size: 11px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 
 		& img {
@@ -576,7 +586,7 @@ li:hover {
 		z-index: 3;
 		opacity: 1;
 		top: 50%;
-		
+
 	}
 
 	&_bar {
@@ -703,9 +713,9 @@ li:hover {
 }
 
 .hidden {
-display: none;
+	display: none;
 }
- 
+
 
 .gallery {
 	width: 100%;
@@ -721,7 +731,7 @@ display: none;
 	img {
 		width: 100%;
 		transition: all 0.3s;
-				
+
 		&:hover {
 			scale: 1.1;
 		}

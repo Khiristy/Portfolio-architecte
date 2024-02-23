@@ -12,7 +12,7 @@
 	<meta name="description" content="" />
 	<link rel="stylesheet" href="./assets/css/style.css" />
 	<link rel="shortcut icon" href="./assets/icons/78942_maps_maps.png" type="image/x-icon" />
-	<script src="./assets/scripts/homePageScript.js" defer></script>
+	<script src="./assets/scripts/index.js" defer></script>
 	<script src="https://kit.fontawesome.com/ecfbb69621.js" crossorigin="anonymous"></script>
 </head>
 
@@ -26,8 +26,8 @@
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
-				<li>projets</li>
-				<li>contact</li>
+				<li><a href="index.html#projets">projets</a></li>
+				<li><a href="index.html#contact">contact</a></li>
 				<li class="logout_btn" id="logoutBtn"><a href="#">logout</a></li>
 				<li class="login_btn hidden" id="loginBtn"><a href="connexion.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
@@ -59,7 +59,7 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<h2 class="project_title">
+			<h2 class="project_title" id="projets">
 				Mes Projets
 				<button class="btn_open-modale" id="modaleOpen">
 					<i class="fa-regular fa-pen-to-square"></i>
@@ -80,7 +80,7 @@
 					<form class="modale_form is_hidden" id="modaleForm" action="#" method="post"
 						enctype="multipart/form-data">
 						<div class="drop_area" id="dropArea" onclick="document.getElementById('fileInputImg').click()">
-							<img src="" alt="" class="modale_form-img" id="modaleFormImg"/>
+							<img src="" alt="" class="modale_form-img" id="modaleFormImg" />
 							<input class="drop_area-input" name="image" type="file" id="fileInputImg" multiple />
 							<div class="modale_background">
 								<i class="fa-regular fa-image"></i>
