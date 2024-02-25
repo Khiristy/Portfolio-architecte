@@ -444,7 +444,7 @@ li:hover {
 		}
 
 		&-trash {
-			display: flex;
+			display: flex !important;
 			align-items: center;
 			justify-content: center;
 			position: absolute;
@@ -735,6 +735,9 @@ li:hover {
 .project {
 	overflow: hidden;
 
+	&_title {
+		padding-top: 50px;
+	}
 	img {
 		width: 100%;
 		transition: all 0.3s;
@@ -799,4 +802,12 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+#introduction {
+	margin: 0;
+}
+
+#portfolio {
+	margin: 0;
 }
