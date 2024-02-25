@@ -307,17 +307,16 @@ const ProjectEditor = {
     checkFormModale() {
 
         this.btnValid.classList.add('is_disable');
-
+        
         const checkAllFields = () => {
-// console.log(this.fileInputImg.value.trim(),this.formEditTitle.value.trim(),parseInt(this.formEditCat.value.trim()));
-console.log(this.fileInputImg.value.trim() === '');
-console.log(this.formEditTitle.value.trim() === '');
-console.log( parseInt(this.formEditCat.value.trim()) === 0);
+            this.allFieldsHaveValues = true
+
+
+
 
 
             if (this.fileInputImg.value.trim() === '' || this.formEditTitle.value.trim() === '' || parseInt(this.formEditCat.value.trim()) === 0) {
                 this.allFieldsHaveValues = false;
-                console.log("this.allFieldsHaveValues = false");
                 this.btnValid.classList.add('is_disable');
             }
 
@@ -325,7 +324,6 @@ console.log( parseInt(this.formEditCat.value.trim()) === 0);
               
                 this.btnValid.classList.remove('is_disable');
                 this.capsuleFalse.classList.add('hidden')
-                console.log("this.allFieldsHaveValues = true");
             }
 
         }
@@ -342,9 +340,9 @@ console.log( parseInt(this.formEditCat.value.trim()) === 0);
             }
         }
 
-        this.fileInputImg.addEventListener('input', handleFieldsCheck);
-        this.formEditTitle.addEventListener('input', handleFieldsCheck);
-        this.formEditCat.addEventListener('input', handleFieldsCheck);
+        this.fileInputImg.addEventListener('input', checkAllFields);
+        this.formEditTitle.addEventListener('input', checkAllFields);
+        this.formEditCat.addEventListener('input', checkAllFields);
 
     },
 
@@ -367,7 +365,6 @@ console.log( parseInt(this.formEditCat.value.trim()) === 0);
 
     checkImgImportModaleFormat(imgImportModale) {
         if (imgImportModale) {
-            console.log(imgImportModale);
 
             if (imgImportModale.size > 4 * 1024 * 1024) {
 
@@ -406,7 +403,6 @@ console.log( parseInt(this.formEditCat.value.trim()) === 0);
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                // 'Content-Type': 'application/json'
             },
 
             body: formData
@@ -537,7 +533,7 @@ console.log( parseInt(this.formEditCat.value.trim()) === 0);
                 break;
 
             case 3:
-            console.log(this.allFieldsHaveValues,this.imgFieldValid);
+            
                 if (this.allFieldsHaveValues && this.imgFieldValid) {
                     this.capsuleTrue.classList.remove('hidden')
                     this.modaleFormImg.src = ''
